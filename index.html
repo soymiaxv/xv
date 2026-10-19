@@ -135,7 +135,6 @@
       user-select: none;
     }
 
-    /* Posiciones estáticas de la pila 3D */
     .photo-card.pos-1 {
       transform: translateY(0) scale(1) rotate(0deg);
       z-index: 3;
@@ -152,7 +151,6 @@
       opacity: 0.7;
     }
 
-    /* Animación al hacer clic para pasar la tarjeta al final */
     .photo-card.swipe-out {
       animation: swipeCard 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     }
@@ -175,7 +173,7 @@
 </head>
 <body class="antialiased selection:bg-braveGold selection:text-braveDarkGreen relative">
 
-  <!-- CONTENEDOR DE PARTICULAS (GENERADAS CON JS) -->
+  <!-- CONTENEDOR DE PARTICULAS -->
   <div id="particles-container"></div>
 
   <!-- BOTÓN REPRODUCTOR DE MÚSICA -->
@@ -238,7 +236,7 @@
     </div>
   </section>
 
-  <!-- UBICACIONES / MISIONES DEL DÍA -->
+  <!-- UBICACIONES -->
   <section class="py-20 px-4 bg-gradient-to-b from-braveDarkGreen via-braveGreen to-braveDarkGreen relative z-10">
     <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
       
@@ -271,11 +269,11 @@
     </div>
   </section>
 
-  <!-- CÓDIGO DE VESTIMENTA Y REGALOS -->
+  <!-- DRESSCODE Y REGALOS -->
   <section class="py-20 px-4 bg-braveDarkGreen text-center relative z-10">
     <div class="max-w-2xl mx-auto space-y-12">
       
-      <!-- DRESSCODE VISUAL CON COLORES -->
+      <!-- DRESSCODE -->
       <div class="p-8 bg-braveGreen/60 backdrop-blur rounded-2xl gold-border reveal">
         <div class="text-4xl mb-3">👗👔</div>
         <h3 class="font-title text-xl text-braveGold font-bold mb-2">CÓDIGO DE VESTIMENTA</h3>
@@ -294,7 +292,7 @@
         </div>
       </div>
 
-      <!-- PASE DE ENTRADA (DINÁMICO CON NOMBRES) -->
+      <!-- PASE DE ENTRADA -->
       <div class="p-8 bg-braveGreen/60 backdrop-blur rounded-2xl gold-border reveal">
         <div class="text-4xl mb-3">🎟️</div>
         <h3 class="font-title text-xl text-braveGold font-bold mb-2">PASE DE ENTRADA</h3>
@@ -315,7 +313,7 @@
     </div>
   </section>
 
-  <!-- GALERÍA / ÁLBUM EN TARJETAS APILADAS 3D (OPCIÓN B) -->
+  <!-- GALERÍA / TARJETAS 3D -->
   <section class="py-20 px-4 bg-gradient-to-b from-braveDarkGreen to-black text-center relative z-10 overflow-hidden">
     <div class="max-w-4xl mx-auto reveal flex flex-col items-center">
       <h3 class="font-title text-2xl text-braveGold font-bold mb-2">ÁLBUM DE RECUERDOS</h3>
@@ -323,7 +321,6 @@
       
       <div class="cards-stack-container" id="cardsContainer" onclick="rotateCards()">
         
-        <!-- FOTO 1 -->
         <div class="photo-card pos-1" id="card1">
           <img src="assets/mia_1.webp" alt="Mía Guadalupe 1" class="w-full h-full object-cover">
           <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-center">
@@ -331,7 +328,6 @@
           </div>
         </div>
 
-        <!-- FOTO 2 -->
         <div class="photo-card pos-2" id="card2">
           <img src="assets/mia_2.webp" alt="Mía Guadalupe 2" class="w-full h-full object-cover">
           <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-center">
@@ -339,7 +335,6 @@
           </div>
         </div>
 
-        <!-- FOTO 3 -->
         <div class="photo-card pos-3" id="card3">
           <img src="assets/mia_3.webp" alt="Mía Guadalupe 3" class="w-full h-full object-cover">
           <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-center">
@@ -351,17 +346,17 @@
     </div>
   </section>
 
-  <!-- SECCIÓN HASHTAG CENTRADA Y CORREGIDA -->
+  <!-- HASHTAG PERFECCIONADO Y CENTRADO -->
   <section class="py-20 px-4 bg-braveDarkGreen text-center relative z-10 flex justify-center">
-    <div class="max-w-xl w-full mx-auto gold-border p-8 rounded-2xl bg-braveGreen/50 backdrop-blur reveal text-center">
+    <div class="max-w-xl w-full mx-auto gold-border p-8 rounded-2xl bg-braveGreen/50 backdrop-blur reveal text-center flex flex-col items-center">
       <div class="text-4xl mb-3">📸✨</div>
       <h3 class="font-title text-2xl text-braveGold font-bold mb-3">COMPARTE NUESTROS RECUERDOS</h3>
       <p class="text-sm text-emerald-100 mb-6">
         Ayúdanos a capturar cada momento de esta gran celebración compartiendo tus fotos y videos en Instagram o TikTok con el hashtag:
       </p>
       
-      <div class="inline-block bg-black/60 border border-braveGold px-6 py-3 rounded-xl mb-6">
-        <span class="font-title text-lg sm:text-xl text-braveGoldLight font-bold tracking-wider">#MisXVMiaGuadalupe2026</span>
+      <div class="flex justify-center items-center bg-black/60 border border-braveGold px-8 py-3 rounded-xl mb-6 max-w-full">
+        <span class="font-title text-xl sm:text-2xl text-braveGoldLight font-bold tracking-widest text-center">#XVMIA2026</span>
       </div>
 
       <p class="text-xs text-emerald-200 italic">
@@ -370,7 +365,7 @@
     </div>
   </section>
 
-  <!-- CONFIRMACIÓN DE ASISTENCIA (WHATSAPP) -->
+  <!-- CONFIRMACIÓN DE ASISTENCIA -->
   <section class="py-20 px-4 bg-braveGreen text-center relative z-10">
     <div class="max-w-md mx-auto gold-border p-8 sm:p-10 rounded-2xl bg-braveDarkGreen/90 backdrop-blur reveal">
       <h3 class="font-title text-2xl text-braveGold font-bold mb-4">CONFIRMA TU ASISTENCIA</h3>
@@ -404,7 +399,7 @@
     }
     setupDynamicPasses();
 
-    // LÓGICA DE ROTACIÓN DE TARJETAS APILADAS 3D (OPCIÓN B)
+    // ROTACIÓN DE TARJETAS APILADAS 3D
     let cardsOrder = ['card1', 'card2', 'card3'];
     let isAnimating = false;
 
@@ -415,14 +410,11 @@
       const topCardId = cardsOrder[0];
       const topCard = document.getElementById(topCardId);
 
-      // Iniciar animación de deslizamiento
       topCard.classList.add('swipe-out');
 
       setTimeout(() => {
-        // Reordenar arreglo de tarjetas
         cardsOrder.push(cardsOrder.shift());
 
-        // Reasignar clases de posición
         cardsOrder.forEach((id, index) => {
           const card = document.getElementById(id);
           card.className = `photo-card pos-${index + 1}`;
@@ -432,7 +424,7 @@
       }, 500);
     }
 
-    // GENERADOR DE PARTICULAS (FUEGOS FATUOS)
+    // GENERADOR DE PARTICULAS
     function createParticles() {
       const container = document.getElementById('particles-container');
       const particleCount = window.innerWidth < 640 ? 30 : 60;
@@ -465,7 +457,7 @@
     }
     createParticles();
 
-    // REVELADO DE ELEMENTOS AL SCROLL
+    // REVELADO AL SCROLL
     const observerOptions = {
       threshold: 0.15,
       rootMargin: "0px 0px -50px 0px"
@@ -508,7 +500,7 @@
       document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
     }, 1000);
 
-    // REPRODUCTOR DE MÚSICA
+    // MÚSICA
     function toggleAudio() {
       const audio = document.getElementById('bgMusic');
       const icon = document.getElementById('musicIcon');
@@ -525,7 +517,7 @@
       }
     }
 
-    // GENERAR ARCHIVO .ICS PARA EL CELULAR
+    // CALENDARIO .ICS
     function downloadICS() {
       const icsData = 
 `BEGIN:VCALENDAR
