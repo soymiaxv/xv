@@ -1,1 +1,11 @@
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="48" fill="#052219" stroke="#d4af37" stroke-width="4" />
+  <!-- Arco Celta / Valiente -->
+  <path d="M 35 20 A 35 35 0 0 0 35 80" fill="none" stroke="#d4af37" stroke-width="6" stroke-linecap="round" />
+  <!-- Cuerda del arco -->
+  <line x1="35" y1="20" x2="35" y2="80" stroke="#f3e5ab" stroke-width="2" stroke-dasharray="2,2" />
+  <!-- Flecha -->
+  <line x1="25" y1="50" x2="70" y2="50" stroke="#d4af37" stroke-width="5" stroke-linecap="round" />
+  <polygon points="70,43 82,50 70,57" fill="#d4af37" />
+  <polygon points="20,45 28,50 20,55" fill="#f3e5ab" />
+</svg>
