@@ -21,7 +21,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mis XV Años - Mía Guadalupe 👑">
   <meta name="twitter:description" content="¡Estás invitado a celebrar mis XV Años! Consulta los detalles y confirma tu asistencia.">
-  <meta name="twitter:image" content="https://soymiaxv.github.io/xv/assets/mia_1.webp">
+  <meta name="twitter:image" content="https://soymiaxv.github.io/xv/assets/foto1.jpg">
 
   <!-- Fuentes Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -106,7 +106,7 @@
       50% { transform: translateY(var(--move-y)) translateX(var(--move-x)) scale(1.4); }
     }
 
-    /* LIBRO DE FOTOS INTERACTIVO 3D */
+    /* LIBRO DE FOTOS INTERACTIVO 3D CORREGIDO */
     .book-container {
       perspective: 1200px;
       display: flex;
@@ -119,7 +119,6 @@
       width: 280px;
       height: 380px;
       transform-style: preserve-3d;
-      transition: transform 0.5s ease;
     }
     @media (min-width: 640px) {
       .book {
@@ -135,7 +134,7 @@
       left: 0;
       transform-origin: left center;
       transform-style: preserve-3d;
-      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), z-index 0.8s;
       cursor: pointer;
       border-radius: 12px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.5);
@@ -309,8 +308,8 @@
       <div class="book-container">
         <div class="book" id="albumBook">
           
-          <!-- PORTADA DEL LIBRO -->
-          <div class="page z-30" onclick="flipPage(this, 1)">
+          <!-- PORTADA DEL LIBRO (HOJA 1) -->
+          <div class="page" id="page1" style="z-index: 3;" onclick="flipPage(1)">
             <div class="page-front flex flex-col justify-center items-center p-6 text-center bg-gradient-to-br from-braveDarkGreen via-braveGreen to-black">
               <div class="text-5xl mb-4">📖</div>
               <h4 class="font-title text-xl text-braveGold font-bold mb-2">MÍA GUADALUPE</h4>
@@ -323,8 +322,8 @@
             </div>
           </div>
 
-          <!-- PÁGINA 2 -->
-          <div class="page z-20" onclick="flipPage(this, 2)">
+          <!-- HOJA 2 -->
+          <div class="page" id="page2" style="z-index: 2;" onclick="flipPage(2)">
             <div class="page-front">
               <img src="assets/mia_2.webp" alt="Foto 2" class="w-full h-full object-cover">
             </div>
@@ -333,8 +332,8 @@
             </div>
           </div>
 
-          <!-- CONTRA PORTADA -->
-          <div class="page z-10">
+          <!-- CONTRA PORTADA (HOJA 3) -->
+          <div class="page" id="page3" style="z-index: 1;">
             <div class="page-front flex flex-col justify-center items-center p-6 text-center bg-gradient-to-br from-braveDarkGreen via-braveGreen to-black">
               <div class="text-4xl mb-2">👑</div>
               <h4 class="font-title text-lg text-braveGold font-bold mb-2">¡GRACIAS POR SER PARTE!</h4>
@@ -365,9 +364,25 @@
 
   <!-- JAVASCRIPT -->
   <script>
-    // GIRAR PÁGINAS DEL LIBRO ÁLBUM 3D
-    function flipPage(element, pageNum) {
-      element.classList.toggle('flipped');
+    // LÓGICA DE CONTROL DE PÁGINAS Y Z-INDEX DEL LIBRO 3D
+    function flipPage(pageNum) {
+      const page = document.getElementById(`page${pageNum}`);
+      
+      if (page.classList.contains('flipped')) {
+        // Regresar la hoja
+        page.classList.remove('flipped');
+        setTimeout(() => {
+          if (pageNum === 1) page.style.zIndex = 3;
+          if (pageNum === 2) page.style.zIndex = 2;
+        }, 300);
+      } else {
+        // Pasar la hoja
+        page.classList.add('flipped');
+        setTimeout(() => {
+          if (pageNum === 1) page.style.zIndex = 1;
+          if (pageNum === 2) page.style.zIndex = 2;
+        }, 300);
+      }
     }
 
     // GENERADOR DE CÚMULO DE PARTICULAS (FUEGOS FATUOS)
