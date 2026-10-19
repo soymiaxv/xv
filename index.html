@@ -106,68 +106,70 @@
       50% { transform: translateY(var(--move-y)) translateX(var(--move-x)) scale(1.4); }
     }
 
-    /* LIBRO DE FOTOS CON DESPLAZAMIENTO CENTRADO */
-    .book-container {
-      perspective: 1000px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 20px auto;
-      padding: 10px;
-      width: 100%;
-      overflow: hidden;
-    }
-    .book {
+    /* ÁLBUM DE TARJETAS APILADAS 3D (OPCIÓN B) */
+    .cards-stack-container {
       position: relative;
-      width: 200px;
-      height: 290px;
-      transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 270px;
+      height: 380px;
+      margin: 30px auto;
+      perspective: 1000px;
     }
     @media (min-width: 640px) {
-      .book {
-        width: 300px;
-        height: 420px;
-      }
-    }
-    /* Al abrir la hoja en celular, desplazamos el libro hacia la derecha */
-    .book.is-open {
-      transform: translateX(35%);
-    }
-    @media (min-width: 640px) {
-      .book.is-open {
-        transform: translateX(25%);
+      .cards-stack-container {
+        width: 320px;
+        height: 450px;
       }
     }
 
-    .page {
+    .photo-card {
       position: absolute;
       width: 100%;
       height: 100%;
-      top: 0;
-      left: 0;
-      transform-origin: left center;
-      transform-style: preserve-3d;
-      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), z-index 0.8s;
-      cursor: pointer;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-    }
-    .page-front, .page-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 12px;
-      overflow: hidden;
+      border-radius: 16px;
       border: 3px solid #d4af37;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+      cursor: pointer;
+      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s, z-index 0.6s;
       background-color: #0b3c2d;
+      user-select: none;
     }
-    .page-back {
-      transform: rotateY(180deg);
+
+    /* Posiciones estáticas de la pila 3D */
+    .photo-card.pos-1 {
+      transform: translateY(0) scale(1) rotate(0deg);
+      z-index: 3;
+      opacity: 1;
     }
-    .page.flipped {
-      transform: rotateY(-180deg);
+    .photo-card.pos-2 {
+      transform: translateY(12px) scale(0.94) rotate(4deg);
+      z-index: 2;
+      opacity: 0.85;
+    }
+    .photo-card.pos-3 {
+      transform: translateY(24px) scale(0.88) rotate(-4deg);
+      z-index: 1;
+      opacity: 0.7;
+    }
+
+    /* Animación al hacer clic para pasar la tarjeta al final */
+    .photo-card.swipe-out {
+      animation: swipeCard 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    @keyframes swipeCard {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-20px) translateX(120%) rotate(15deg) scale(0.95);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(24px) translateX(0) rotate(-4deg) scale(0.88);
+        opacity: 0.7;
+      }
     }
   </style>
 </head>
@@ -313,54 +315,43 @@
     </div>
   </section>
 
-  <!-- GALERÍA / ÁLBUM EN FORMA DE LIBRO 3D -->
+  <!-- GALERÍA / ÁLBUM EN TARJETAS APILADAS 3D (OPCIÓN B) -->
   <section class="py-20 px-4 bg-gradient-to-b from-braveDarkGreen to-black text-center relative z-10 overflow-hidden">
     <div class="max-w-4xl mx-auto reveal flex flex-col items-center">
       <h3 class="font-title text-2xl text-braveGold font-bold mb-2">ÁLBUM DE RECUERDOS</h3>
-      <p class="text-xs text-emerald-200 mb-8 italic">👉 Toca las páginas para abrir y ver las fotos</p>
+      <p class="text-xs text-emerald-200 mb-6 italic">👉 Toca cualquier foto para ver la siguiente</p>
       
-      <div class="book-container">
-        <div class="book" id="albumBook">
-          
-          <!-- PORTADA DEL LIBRO (HOJA 1) -->
-          <div class="page" id="page1" style="z-index: 3;" onclick="flipPage(1)">
-            <div class="page-front flex flex-col justify-center items-center p-6 text-center bg-gradient-to-br from-braveDarkGreen via-braveGreen to-black">
-              <div class="text-5xl mb-4">📖</div>
-              <h4 class="font-title text-xl text-braveGold font-bold mb-2">MÍA GUADALUPE</h4>
-              <p class="text-xs text-emerald-200 uppercase tracking-widest">Mis XV Años</p>
-              <div class="w-16 h-1 bg-braveGold my-4 rounded-full"></div>
-              <span class="text-[10px] text-braveGoldLight animate-pulse">Toca para abrir ➔</span>
-            </div>
-            <div class="page-back">
-              <img src="assets/mia_1.webp" alt="Foto 1" class="w-full h-full object-cover">
-            </div>
+      <div class="cards-stack-container" id="cardsContainer" onclick="rotateCards()">
+        
+        <!-- FOTO 1 -->
+        <div class="photo-card pos-1" id="card1">
+          <img src="assets/mia_1.webp" alt="Mía Guadalupe 1" class="w-full h-full object-cover">
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-center">
+            <span class="font-title text-sm text-braveGold font-bold">Mía Guadalupe 👑</span>
           </div>
-
-          <!-- HOJA 2 -->
-          <div class="page" id="page2" style="z-index: 2;" onclick="flipPage(2)">
-            <div class="page-front">
-              <img src="assets/mia_2.webp" alt="Foto 2" class="w-full h-full object-cover">
-            </div>
-            <div class="page-back">
-              <img src="assets/mia_3.webp" alt="Foto 3" class="w-full h-full object-cover">
-            </div>
-          </div>
-
-          <!-- CONTRA PORTADA (HOJA 3) -->
-          <div class="page" id="page3" style="z-index: 1;">
-            <div class="page-front flex flex-col justify-center items-center p-6 text-center bg-gradient-to-br from-braveDarkGreen via-braveGreen to-black">
-              <div class="text-4xl mb-2">👑</div>
-              <h4 class="font-title text-lg text-braveGold font-bold mb-2">¡GRACIAS POR SER PARTE!</h4>
-              <p class="text-xs text-emerald-200 italic">"El destino vive dentro de nosotros"</p>
-            </div>
-          </div>
-
         </div>
+
+        <!-- FOTO 2 -->
+        <div class="photo-card pos-2" id="card2">
+          <img src="assets/mia_2.webp" alt="Mía Guadalupe 2" class="w-full h-full object-cover">
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-center">
+            <span class="font-title text-sm text-braveGold font-bold">Mis XV Años ✨</span>
+          </div>
+        </div>
+
+        <!-- FOTO 3 -->
+        <div class="photo-card pos-3" id="card3">
+          <img src="assets/mia_3.webp" alt="Mía Guadalupe 3" class="w-full h-full object-cover">
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-center">
+            <span class="font-title text-sm text-braveGold font-bold">Celebración Valiente 🏹</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- SECCIÓN HASHTAG CENTRADA -->
+  <!-- SECCIÓN HASHTAG CENTRADA Y CORREGIDA -->
   <section class="py-20 px-4 bg-braveDarkGreen text-center relative z-10 flex justify-center">
     <div class="max-w-xl w-full mx-auto gold-border p-8 rounded-2xl bg-braveGreen/50 backdrop-blur reveal text-center">
       <div class="text-4xl mb-3">📸✨</div>
@@ -413,30 +404,32 @@
     }
     setupDynamicPasses();
 
-    // LÓGICA DE CONTROL Y DESPLAZAMIENTO DEL LIBRO 3D
-    function flipPage(pageNum) {
-      const page = document.getElementById(`page${pageNum}`);
-      const book = document.getElementById('albumBook');
-      
-      if (page.classList.contains('flipped')) {
-        page.classList.remove('flipped');
-        setTimeout(() => {
-          if (pageNum === 1) {
-            page.style.zIndex = 3;
-            book.classList.remove('is-open'); // Regresa al centro cuando se cierra
-          }
-          if (pageNum === 2) page.style.zIndex = 2;
-        }, 300);
-      } else {
-        page.classList.add('flipped');
-        if (pageNum === 1) {
-          book.classList.add('is-open'); // Desplaza el libro a la derecha para ver la hoja izquierda
-        }
-        setTimeout(() => {
-          if (pageNum === 1) page.style.zIndex = 1;
-          if (pageNum === 2) page.style.zIndex = 2;
-        }, 300);
-      }
+    // LÓGICA DE ROTACIÓN DE TARJETAS APILADAS 3D (OPCIÓN B)
+    let cardsOrder = ['card1', 'card2', 'card3'];
+    let isAnimating = false;
+
+    function rotateCards() {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const topCardId = cardsOrder[0];
+      const topCard = document.getElementById(topCardId);
+
+      // Iniciar animación de deslizamiento
+      topCard.classList.add('swipe-out');
+
+      setTimeout(() => {
+        // Reordenar arreglo de tarjetas
+        cardsOrder.push(cardsOrder.shift());
+
+        // Reasignar clases de posición
+        cardsOrder.forEach((id, index) => {
+          const card = document.getElementById(id);
+          card.className = `photo-card pos-${index + 1}`;
+        });
+
+        isAnimating = false;
+      }, 500);
     }
 
     // GENERADOR DE PARTICULAS (FUEGOS FATUOS)
