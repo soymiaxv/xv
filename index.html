@@ -106,7 +106,7 @@
       50% { transform: translateY(var(--move-y)) translateX(var(--move-x)) scale(1.4); }
     }
 
-    /* LIBRO DE FOTOS INTERACTIVO 3D CORREGIDO */
+    /* LIBRO DE FOTOS INTERACTIVO 3D */
     .book-container {
       perspective: 1200px;
       display: flex;
@@ -278,11 +278,11 @@
         </div>
       </div>
 
-      <!-- PASE DE ENTRADA -->
+      <!-- PASE DE ENTRADA (DINÁMICO) -->
       <div class="p-8 bg-braveGreen/60 backdrop-blur rounded-2xl gold-border reveal">
         <div class="text-4xl mb-3">🎟️</div>
         <h3 class="font-title text-xl text-braveGold font-bold mb-2">PASES DE ENTRADA</h3>
-        <p class="text-sm text-emerald-100">
+        <p class="text-sm text-emerald-100" id="passText">
           Hemos reservado <span class="font-bold text-white underline decoration-braveGold decoration-2">pases familiares</span> en su honor.
         </p>
       </div>
@@ -352,7 +352,7 @@
       <h3 class="font-title text-2xl text-braveGold font-bold mb-4">CONFIRMA TU ASISTENCIA</h3>
       <p class="text-sm text-emerald-100 mb-8">Por favor confirma tu presencia antes del 1 de Noviembre de 2026.</p>
       
-      <a href="https://wa.me/528331171109?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Mía%20Guadalupe" target="_blank" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-3.5 px-8 rounded-full transition-all text-sm shadow-xl hover:scale-105">
+      <a id="whatsappBtn" href="https://wa.me/528331171109?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Mía%20Guadalupe" target="_blank" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-3.5 px-8 rounded-full transition-all text-sm shadow-xl hover:scale-105">
         💬 CONFIRMAR POR WHATSAPP
       </a>
     </div>
@@ -364,19 +364,53 @@
 
   <!-- JAVASCRIPT -->
   <script>
+    // PASES DINÁMICOS POR PARAMETRO URL
+    function setupDynamicPasses() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const pases = urlParams.get('pases');
+      const familia = urlParams.get('familia');
+      const passTextEl = document.getElementById('passText');
+      const whatsappBtn = document.getElementById('whatsappBtn');
+
+      if (pases || familia) {
+        let textoHtml = 'Hemos reservado ';
+        
+        if (pases) {
+          const numPases = parseInt(pases);
+          textoHtml += `<span class="font-bold text-white underline decoration-braveGold decoration-2">${numPases} ${numPases === 1 ? 'pase' : 'pases'}</span> `;
+        } else {
+          textoHtml += `<span class="font-bold text-white underline decoration-braveGold decoration-2">pases</span> `;
+        }
+
+        if (familia) {
+          textoHtml += `en honor a <strong class="text-braveGold">${familia}</strong>.`;
+        } else {
+          textoHtml += `en su honor.`;
+        }
+
+        passTextEl.innerHTML = textoHtml;
+
+        // Personalizar también el mensaje predeterminado de WhatsApp
+        let mensajeWa = `¡Hola! Confirmo mi asistencia a los XV años de Mía Guadalupe.`;
+        if (familia) mensajeWa += ` (Familia/Invitado: ${familia}`;
+        if (pases) mensajeWa += `, ${pases} pases)`;
+        
+        whatsappBtn.href = `https://wa.me/528331171109?text=${encodeURIComponent(mensajeWa)}`;
+      }
+    }
+    setupDynamicPasses();
+
     // LÓGICA DE CONTROL DE PÁGINAS Y Z-INDEX DEL LIBRO 3D
     function flipPage(pageNum) {
       const page = document.getElementById(`page${pageNum}`);
       
       if (page.classList.contains('flipped')) {
-        // Regresar la hoja
         page.classList.remove('flipped');
         setTimeout(() => {
           if (pageNum === 1) page.style.zIndex = 3;
           if (pageNum === 2) page.style.zIndex = 2;
         }, 300);
       } else {
-        // Pasar la hoja
         page.classList.add('flipped');
         setTimeout(() => {
           if (pageNum === 1) page.style.zIndex = 1;
@@ -385,7 +419,7 @@
       }
     }
 
-    // GENERADOR DE CÚMULO DE PARTICULAS (FUEGOS FATUOS)
+    // GENERADOR DE PARTICULAS (FUEGOS FATUOS)
     function createParticles() {
       const container = document.getElementById('particles-container');
       const particleCount = window.innerWidth < 640 ? 30 : 60;
