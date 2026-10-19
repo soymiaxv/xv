@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>XV Años - Mía Guadalupe</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
   <!-- Etiquetas Open Graph para WhatsApp y Redes Sociales -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://soymiaxv.github.io/xv/">
   <meta property="og:title" content="Mis XV Años - Mía Guadalupe 👑">
   <meta property="og:description" content="¡Estás invitado a celebrar mis XV Años! Consulta la ubicación, confirma tu asistencia y acompaña a Mía en esta gran aventura.">
-  
-  <!-- Imagen de vista previa (debe ser la URL completa) -->
   <meta property="og:image" content="https://soymiaxv.github.io/xv/assets/foto1.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -21,9 +22,6 @@
   <meta name="twitter:title" content="Mis XV Años - Mía Guadalupe 👑">
   <meta name="twitter:description" content="¡Estás invitado a celebrar mis XV Años! Consulta los detalles y confirma tu asistencia.">
   <meta name="twitter:image" content="https://soymiaxv.github.io/xv/assets/foto1.jpg">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
   <!-- Fuentes Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,14 +81,6 @@
       transform: translateY(0) scale(1);
     }
 
-    /* EFECTO PARALLAX EN EL HERO */
-    .bg-parallax {
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-
     /* PARTICULAS / FUEGOS FATUOS DE FONDO */
     #particles-container {
       position: fixed;
@@ -112,12 +102,59 @@
     }
 
     @keyframes floatWispParticle {
-      0%, 100% {
-        transform: translateY(0) translateX(0) scale(0.8);
+      0%, 100% { transform: translateY(0) translateX(0) scale(0.8); }
+      50% { transform: translateY(var(--move-y)) translateX(var(--move-x)) scale(1.4); }
+    }
+
+    /* LIBRO DE FOTOS INTERACTIVO 3D */
+    .book-container {
+      perspective: 1200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto;
+    }
+    .book {
+      position: relative;
+      width: 280px;
+      height: 380px;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+    @media (min-width: 640px) {
+      .book {
+        width: 340px;
+        height: 460px;
       }
-      50% {
-        transform: translateY(var(--move-y)) translateX(var(--move-x)) scale(1.4);
-      }
+    }
+    .page {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+      cursor: pointer;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .page-front, .page-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 3px solid #d4af37;
+      background-color: #0b3c2d;
+    }
+    .page-back {
+      transform: rotateY(180deg);
+    }
+    .page.flipped {
+      transform: rotateY(-180deg);
     }
   </style>
 </head>
@@ -134,8 +171,8 @@
     <audio id="bgMusic" loop src="assets/musica.mp3"></audio>
   </div>
 
-  <!-- HERO / PORTADA CON PARALLAX -->
-  <header class="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-braveGreen via-braveDarkGreen to-black relative overflow-hidden bg-parallax">
+  <!-- HERO / PORTADA -->
+  <header class="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-braveGreen via-braveDarkGreen to-black relative overflow-hidden">
     <div class="p-8 sm:p-12 gold-border rounded-2xl bg-braveDarkGreen/85 backdrop-blur-md max-w-xl w-full z-10 reveal active">
       <p class="tracking-widest text-xs uppercase text-braveGold mb-2 font-semibold">Mis XV Años</p>
       <h1 class="font-title text-4xl sm:text-6xl font-black gold-gradient-text my-3 uppercase tracking-wider">
@@ -263,25 +300,52 @@
     </div>
   </section>
 
-  <!-- GALERÍA DE FOTOS -->
-  <section class="py-20 px-4 bg-gradient-to-b from-braveDarkGreen to-black text-center relative z-10">
+  <!-- GALERÍA / ÁLBUM EN FORMA DE LIBRO 3D -->
+  <section class="py-20 px-4 bg-gradient-to-b from-braveDarkGreen to-black text-center relative z-10 overflow-hidden">
     <div class="max-w-4xl mx-auto reveal">
-      <h3 class="font-title text-2xl text-braveGold font-bold mb-2">GALERÍA DE FOTOS</h3>
-      <p class="text-xs text-emerald-200 mb-8 italic">Toca cualquier foto para ampliarla</p>
+      <h3 class="font-title text-2xl text-braveGold font-bold mb-2">ÁLBUM DE RECUERDOS</h3>
+      <p class="text-xs text-emerald-200 mb-8 italic">👉 Toca o haz clic en las páginas para pasar la hoja</p>
       
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <img src="assets/foto1.jpg" alt="Mía Guadalupe" onclick="openLightbox(this.src)" class="rounded-xl gold-border object-cover h-64 w-full cursor-pointer hover:scale-105 hover:brightness-110 transition-all shadow-lg">
-        <img src="assets/foto2.jpg" alt="Mía Guadalupe" onclick="openLightbox(this.src)" class="rounded-xl gold-border object-cover h-64 w-full cursor-pointer hover:scale-105 hover:brightness-110 transition-all shadow-lg">
-        <img src="assets/foto3.jpg" alt="Mía Guadalupe" onclick="openLightbox(this.src)" class="rounded-xl gold-border object-cover h-64 w-full cursor-pointer hover:scale-105 hover:brightness-110 transition-all shadow-lg">
+      <div class="book-container">
+        <div class="book" id="albumBook">
+          
+          <!-- PORTADA DEL LIBRO -->
+          <div class="page z-30" onclick="flipPage(this, 1)">
+            <div class="page-front flex flex-col justify-center items-center p-6 text-center bg-gradient-to-br from-braveDarkGreen via-braveGreen to-black">
+              <div class="text-5xl mb-4">📖</div>
+              <h4 class="font-title text-xl text-braveGold font-bold mb-2">MÍA GUADALUPE</h4>
+              <p class="text-xs text-emerald-200 uppercase tracking-widest">Mis XV Años</p>
+              <div class="w-16 h-1 bg-braveGold my-4 rounded-full"></div>
+              <span class="text-[10px] text-braveGoldLight animate-pulse">Toca para abrir ➔</span>
+            </div>
+            <div class="page-back">
+              <img src="assets/foto1.jpg" alt="Foto 1" class="w-full h-full object-cover">
+            </div>
+          </div>
+
+          <!-- PÁGINA 2 -->
+          <div class="page z-20" onclick="flipPage(this, 2)">
+            <div class="page-front">
+              <img src="assets/foto2.jpg" alt="Foto 2" class="w-full h-full object-cover">
+            </div>
+            <div class="page-back">
+              <img src="assets/foto3.jpg" alt="Foto 3" class="w-full h-full object-cover">
+            </div>
+          </div>
+
+          <!-- CONTRA PORTADA -->
+          <div class="page z-10">
+            <div class="page-front flex flex-col justify-center items-center p-6 text-center bg-gradient-to-br from-braveDarkGreen via-braveGreen to-black">
+              <div class="text-4xl mb-2">👑</div>
+              <h4 class="font-title text-lg text-braveGold font-bold mb-2">¡GRACIAS POR SER PARTE!</h4>
+              <p class="text-xs text-emerald-200 italic">"El destino vive dentro de nosotros"</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- VISOR DE FOTOS EN PANTALLA COMPLETA (LIGHTBOX) -->
-  <div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4 backdrop-blur-md">
-    <span class="absolute top-4 right-6 text-white text-4xl font-bold cursor-pointer hover:text-braveGold transition-colors">&times;</span>
-    <img id="lightboxImg" class="max-h-[90vh] max-w-[90vw] rounded-2xl gold-border object-contain">
-  </div>
 
   <!-- CONFIRMACIÓN DE ASISTENCIA (WHATSAPP) -->
   <section class="py-20 px-4 bg-braveGreen text-center relative z-10">
@@ -299,25 +363,30 @@
     <p>© 2026 XV Años Mía Guadalupe · Celebración Valiente</p>
   </footer>
 
-  <!-- JAVASCRIPT: PARTICULAS, ANIMACIONES SCROLL, CONTADOR Y MÚSICA -->
+  <!-- JAVASCRIPT -->
   <script>
+    // GIRAR PÁGINAS DEL LIBRO ÁLBUM 3D
+    function flipPage(element, pageNum) {
+      element.classList.toggle('flipped');
+    }
+
     // GENERADOR DE CÚMULO DE PARTICULAS (FUEGOS FATUOS)
     function createParticles() {
       const container = document.getElementById('particles-container');
-      const particleCount = window.innerWidth < 640 ? 30 : 60; // Ajuste según pantalla
+      const particleCount = window.innerWidth < 640 ? 30 : 60;
 
       for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'wisp-particle';
 
-        const size = Math.random() * 8 + 4; // Entre 4px y 12px
+        const size = Math.random() * 8 + 4;
         const left = Math.random() * 100;
         const top = Math.random() * 100;
-        const duration = Math.random() * 8 + 4; // Entre 4s y 12s
+        const duration = Math.random() * 8 + 4;
         const delay = Math.random() * 5;
         const opacity = Math.random() * 0.7 + 0.3;
-        const moveX = (Math.random() - 0.5) * 60; // Movimiento horizontal amplio
-        const moveY = (Math.random() - 0.5) * 80; // Movimiento vertical amplio
+        const moveX = (Math.random() - 0.5) * 60;
+        const moveY = (Math.random() - 0.5) * 80;
 
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
@@ -334,7 +403,7 @@
     }
     createParticles();
 
-    // INTERSECTION OBSERVER (REVELADO DE ELEMENTOS AL SCROLL)
+    // REVELADO DE ELEMENTOS AL SCROLL
     const observerOptions = {
       threshold: 0.15,
       rootMargin: "0px 0px -50px 0px"
@@ -392,16 +461,6 @@
         icon.innerText = "🎵";
         text.innerText = "Música";
       }
-    }
-
-    // LIGHTBOX GALERÍA
-    function openLightbox(src) {
-      document.getElementById('lightboxImg').src = src;
-      document.getElementById('lightbox').classList.remove('hidden');
-    }
-
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.add('hidden');
     }
 
     // GENERAR ARCHIVO .ICS PARA EL CELULAR
