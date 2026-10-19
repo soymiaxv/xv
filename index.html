@@ -95,10 +95,15 @@
       <p class="font-title text-xl text-white font-bold tracking-widest my-2">14 · NOVIEMBRE · 2026</p>
       <p class="text-xs tracking-wider text-braveGoldLight uppercase mb-6">Tampico, Tamaulipas</p>
 
-      <!-- AGREGAR A GOOGLE CALENDAR -->
-      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+A%C3%B1os+de+M%C3%ADa+Guadalupe&dates=20261114T230000Z/20261115T050000Z&details=Acomp%C3%B1anos+a+celebrar+los+XV+A%C3%B1os+de+M%C3%ADa+Guadalupe.&location=Hacienda+Los+Girasoles" target="_blank" class="inline-flex items-center gap-2 bg-braveGold/20 border border-braveGold text-braveGoldLight hover:bg-braveGold hover:text-braveDarkGreen text-xs font-bold py-2 px-4 rounded-full transition-all">
-        📅 AGREGAR A GOOGLE CALENDAR
-      </a>
+      <!-- BOTONES DE CALENDARIO -->
+      <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+        <button onclick="downloadICS()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-braveGold text-braveDarkGreen hover:bg-braveGoldLight text-xs font-bold py-2.5 px-4 rounded-full transition-all shadow-md">
+          📅 GUARDAR EVENTO EN MI CELULAR
+        </button>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+A%C3%B1os+de+M%C3%ADa+Guadalupe&dates=20261114T230000Z/20261115T050000Z&details=Acomp%C3%B1anos+a+celebrar+los+XV+A%C3%B1os+de+M%C3%ADa+Guadalupe.&location=Hacienda+Los+Girasoles" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-braveGold/20 border border-braveGold text-braveGoldLight hover:bg-braveGold hover:text-braveDarkGreen text-xs font-bold py-2.5 px-4 rounded-full transition-all">
+          🌐 GOOGLE CALENDAR
+        </a>
+      </div>
     </div>
   </header>
 
@@ -237,7 +242,7 @@
     <p>© 2026 XV Años Mía Guadalupe · Celebración Valiente</p>
   </footer>
 
-  <!-- JAVASCRIPT: CONTADOR, MÚSICA Y LIGHTBOX -->
+  <!-- JAVASCRIPT: CONTADOR, MÚSICA, LIGHTBOX Y ARCHIVO .ICS -->
   <script>
     const eventDate = new Date("Nov 14, 2026 17:00:00").getTime();
 
@@ -268,27 +273,4 @@
     function toggleAudio() {
       const audio = document.getElementById('bgMusic');
       const icon = document.getElementById('musicIcon');
-      const text = document.getElementById('musicText');
-
-      if (audio.paused) {
-        audio.play();
-        icon.innerText = "🔊";
-        text.innerText = "Pausar";
-      } else {
-        audio.pause();
-        icon.innerText = "🎵";
-        text.innerText = "Música";
-      }
-    }
-
-    function openLightbox(src) {
-      document.getElementById('lightboxImg').src = src;
-      document.getElementById('lightbox').classList.remove('hidden');
-    }
-
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.add('hidden');
-    }
-  </script>
-</body>
-</html>
+      const text =
