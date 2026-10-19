@@ -371,3 +371,178 @@
 
   <!-- CONFIRMACIÓN DE ASISTENCIA (WHATSAPP) -->
   <section class="py-20 px-4 bg-braveGreen text-center relative z-10">
+    <div class="max-w-md mx-auto gold-border p-8 sm:p-10 rounded-2xl bg-braveDarkGreen/90 backdrop-blur reveal">
+      <h3 class="font-title text-2xl text-braveGold font-bold mb-4">CONFIRMA TU ASISTENCIA</h3>
+      <p class="text-sm text-emerald-100 mb-8">Por favor confirma tu presencia antes del 1 de Noviembre de 2026.</p>
+      
+      <a id="whatsappBtn" href="https://wa.me/528331171109?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Mía%20Guadalupe" target="_blank" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-3.5 px-8 rounded-full transition-all text-sm shadow-xl hover:scale-105">
+        💬 CONFIRMAR POR WHATSAPP
+      </a>
+    </div>
+  </section>
+
+  <footer class="py-6 bg-black text-center text-xs text-braveGoldLight/60 relative z-10">
+    <p>© 2026 XV Años Mía Guadalupe · Celebración Valiente</p>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // PASES DINÁMICOS POR NOMBRE (EJEMPLO: ?invitado=Familia%20Gutiérrez%20Frías)
+    function setupDynamicPasses() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const invitado = urlParams.get('invitado');
+      const passTextEl = document.getElementById('passText');
+      const whatsappBtn = document.getElementById('whatsappBtn');
+
+      if (invitado) {
+        passTextEl.innerHTML = `Pase especial reservado en honor a:<br><span class="font-title text-lg text-white font-bold block mt-2 underline decoration-braveGold decoration-2">${invitado}</span>`;
+
+        let mensajeWa = `¡Hola! Confirmo mi asistencia a los XV años de Mía Guadalupe. (Asistirá: ${invitado})`;
+        whatsappBtn.href = `https://wa.me/528331171109?text=${encodeURIComponent(mensajeWa)}`;
+      }
+    }
+    setupDynamicPasses();
+
+    // LÓGICA DE CONTROL DE PÁGINAS Y Z-INDEX DEL LIBRO 3D
+    function flipPage(pageNum) {
+      const page = document.getElementById(`page${pageNum}`);
+      
+      if (page.classList.contains('flipped')) {
+        page.classList.remove('flipped');
+        setTimeout(() => {
+          if (pageNum === 1) page.style.zIndex = 3;
+          if (pageNum === 2) page.style.zIndex = 2;
+        }, 300);
+      } else {
+        page.classList.add('flipped');
+        setTimeout(() => {
+          if (pageNum === 1) page.style.zIndex = 1;
+          if (pageNum === 2) page.style.zIndex = 2;
+        }, 300);
+      }
+    }
+
+    // GENERADOR DE PARTICULAS (FUEGOS FATUOS)
+    function createParticles() {
+      const container = document.getElementById('particles-container');
+      const particleCount = window.innerWidth < 640 ? 30 : 60;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'wisp-particle';
+
+        const size = Math.random() * 8 + 4;
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const duration = Math.random() * 8 + 4;
+        const delay = Math.random() * 5;
+        const opacity = Math.random() * 0.7 + 0.3;
+        const moveX = (Math.random() - 0.5) * 60;
+        const moveY = (Math.random() - 0.5) * 80;
+
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${left}%`;
+        particle.style.top = `${top}%`;
+        particle.style.setProperty('--duration', `${duration}s`);
+        particle.style.setProperty('--delay', `${delay}s`);
+        particle.style.setProperty('--opacity', opacity);
+        particle.style.setProperty('--move-x', `${moveX}px`);
+        particle.style.setProperty('--move-y', `${moveY}px`);
+
+        container.appendChild(particle);
+      }
+    }
+    createParticles();
+
+    // REVELADO DE ELEMENTOS AL SCROLL
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // CONTADOR REGRESIVO
+    const eventDate = new Date("Nov 14, 2026 17:00:00").getTime();
+
+    const countdown = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance < 0) {
+        clearInterval(countdown);
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+      document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+      document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+      document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+    }, 1000);
+
+    // REPRODUCTOR DE MÚSICA
+    function toggleAudio() {
+      const audio = document.getElementById('bgMusic');
+      const icon = document.getElementById('musicIcon');
+      const text = document.getElementById('musicText');
+
+      if (audio.paused) {
+        audio.play();
+        icon.innerText = "🔊";
+        text.innerText = "Pausar";
+      } else {
+        audio.pause();
+        icon.innerText = "🎵";
+        text.innerText = "Música";
+      }
+    }
+
+    // GENERAR ARCHIVO .ICS PARA EL CELULAR
+    function downloadICS() {
+      const icsData = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//XV Años Mía Guadalupe//NONSGML v1.0//ES
+BEGIN:VEVENT
+SUMMARY:XV Años de Mía Guadalupe 👑
+DESCRIPTION:Acompáñanos a celebrar los XV Años de Mía Guadalupe.\\nMisa: 17:00 HRS en Iglesia de Nuestra Señora de las Mercedes.\\nRecepción: 19:00 HRS en Hacienda Los Girasoles.
+LOCATION:Hacienda Los Girasoles, Tampico, Tamaulipas
+DTSTART:20261114T230000Z
+DTEND:20261115T050000Z
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Recordatorio: ¡Mañana son los XV Años de Mía Guadalupe!
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', 'XV_Mia_Guadalupe.ics');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
