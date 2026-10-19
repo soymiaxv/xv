@@ -275,4 +275,56 @@
     function toggleAudio() {
       const audio = document.getElementById('bgMusic');
       const icon = document.getElementById('musicIcon');
-      const text =
+      const text = document.getElementById('musicText');
+
+      if (audio.paused) {
+        audio.play();
+        icon.innerText = "🔊";
+        text.innerText = "Pausar";
+      } else {
+        audio.pause();
+        icon.innerText = "🎵";
+        text.innerText = "Música";
+      }
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+    }
+
+    // GENERAR ARCHIVO .ICS PARA EL CALENDARIO DEL CELULAR (IPHONE / ANDROID)
+    function downloadICS() {
+      const icsData = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//XV Años Mía Guadalupe//NONSGML v1.0//ES
+BEGIN:VEVENT
+SUMMARY:XV Años de Mía Guadalupe 👑
+DESCRIPTION:Acompáñanos a celebrar los XV Años de Mía Guadalupe.\\nMisa: 17:00 HRS en Iglesia de Nuestra Señora de las Mercedes.\\nRecepción: 19:00 HRS en Hacienda Los Girasoles.
+LOCATION:Hacienda Los Girasoles, Tampico, Tamaulipas
+DTSTART:20261114T230000Z
+DTEND:20261115T050000Z
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Recordatorio: ¡Mañana son los XV Años de Mía Guadalupe!
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', 'XV_Mia_Guadalupe.ics');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
