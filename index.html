@@ -278,12 +278,12 @@
         </div>
       </div>
 
-      <!-- PASE DE ENTRADA (DINÁMICO) -->
+      <!-- PASE DE ENTRADA (DINÁMICO CON NOMBRES) -->
       <div class="p-8 bg-braveGreen/60 backdrop-blur rounded-2xl gold-border reveal">
         <div class="text-4xl mb-3">🎟️</div>
-        <h3 class="font-title text-xl text-braveGold font-bold mb-2">PASES DE ENTRADA</h3>
+        <h3 class="font-title text-xl text-braveGold font-bold mb-2">PASE DE ENTRADA</h3>
         <p class="text-sm text-emerald-100" id="passText">
-          Hemos reservado <span class="font-bold text-white underline decoration-braveGold decoration-2">pases familiares</span> en su honor.
+          Hemos reservado un lugar especial en su honor.
         </p>
       </div>
 
@@ -346,6 +346,25 @@
     </div>
   </section>
 
+  <!-- NUEVA SECCIÓN: COMPARTE TUS FOTOS Y VIDEOS (#HASHTAG) -->
+  <section class="py-20 px-4 bg-braveDarkGreen text-center relative z-10">
+    <div class="max-w-xl mx-auto gold-border p-8 rounded-2xl bg-braveGreen/50 backdrop-blur reveal">
+      <div class="text-4xl mb-3">📸✨</div>
+      <h3 class="font-title text-2xl text-braveGold font-bold mb-3">COMPARTE NUESTROS RECUERDOS</h3>
+      <p class="text-sm text-emerald-100 mb-6">
+        Ayúdanos a capturar cada momento de esta gran celebración compartiendo tus fotos y videos en Instagram o TikTok con el hashtag:
+      </p>
+      
+      <div class="inline-block bg-black/60 border border-braveGold px-6 py-3 rounded-xl mb-6">
+        <span class="font-title text-lg sm:text-xl text-braveGoldLight font-bold tracking-wider">#MisXVMiaGuadalupe2026</span>
+      </div>
+
+      <p class="text-xs text-emerald-200 italic">
+        ¡Etáctanos en tus historias para revivir juntos esta mágica noche!
+      </p>
+    </div>
+  </section>
+
   <!-- CONFIRMACIÓN DE ASISTENCIA (WHATSAPP) -->
   <section class="py-20 px-4 bg-braveGreen text-center relative z-10">
     <div class="max-w-md mx-auto gold-border p-8 sm:p-10 rounded-2xl bg-braveDarkGreen/90 backdrop-blur reveal">
@@ -364,37 +383,17 @@
 
   <!-- JAVASCRIPT -->
   <script>
-    // PASES DINÁMICOS POR PARAMETRO URL
+    // PASES DINÁMICOS POR NOMBRE (EJEMPLO: ?invitado=Familia%20Gutiérrez%20Frías)
     function setupDynamicPasses() {
       const urlParams = new URLSearchParams(window.location.search);
-      const pases = urlParams.get('pases');
-      const familia = urlParams.get('familia');
+      const invitado = urlParams.get('invitado');
       const passTextEl = document.getElementById('passText');
       const whatsappBtn = document.getElementById('whatsappBtn');
 
-      if (pases || familia) {
-        let textoHtml = 'Hemos reservado ';
-        
-        if (pases) {
-          const numPases = parseInt(pases);
-          textoHtml += `<span class="font-bold text-white underline decoration-braveGold decoration-2">${numPases} ${numPases === 1 ? 'pase' : 'pases'}</span> `;
-        } else {
-          textoHtml += `<span class="font-bold text-white underline decoration-braveGold decoration-2">pases</span> `;
-        }
+      if (invitado) {
+        passTextEl.innerHTML = `Pase especial reservado en honor a:<br><span class="font-title text-lg text-white font-bold block mt-2 underline decoration-braveGold decoration-2">${invitado}</span>`;
 
-        if (familia) {
-          textoHtml += `en honor a <strong class="text-braveGold">${familia}</strong>.`;
-        } else {
-          textoHtml += `en su honor.`;
-        }
-
-        passTextEl.innerHTML = textoHtml;
-
-        // Personalizar también el mensaje predeterminado de WhatsApp
-        let mensajeWa = `¡Hola! Confirmo mi asistencia a los XV años de Mía Guadalupe.`;
-        if (familia) mensajeWa += ` (Familia/Invitado: ${familia}`;
-        if (pases) mensajeWa += `, ${pases} pases)`;
-        
+        let mensajeWa = `¡Hola! Confirmo mi asistencia a los XV años de Mía Guadalupe. (Asistirá: ${invitado})`;
         whatsappBtn.href = `https://wa.me/528331171109?text=${encodeURIComponent(mensajeWa)}`;
       }
     }
