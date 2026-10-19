@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XV Años - Mía Guadalupe</title>
+  
+  <!-- Fuentes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS por CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            braveGreen: '#0b3c2d',
+            braveDarkGreen: '#052219',
+            braveGold: '#d4af37',
+            braveGoldLight: '#f3e5ab',
+            braveNavy: '#0c1b33'
+          },
+          fontFamily: {
+            title: ['Cinzel', 'serif'],
+            body: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #052219;
+      color: #f3e5ab;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+    .gold-border {
+      border: 2px solid #d4af37;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fff2a3 0%, #d4af37 50%, #aa7c11 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Animación Fuegos Fatuos (Will-o'-the-wisps) */
+    .wisp {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: rgba(147, 197, 253, 0.9);
+      border-radius: 50%;
+      box-shadow: 0 0 12px 6px rgba(59, 130, 246, 0.8), 0 0 20px 10px rgba(147, 197, 253, 0.5);
+      animation: floatWisp 6s infinite ease-in-out;
+      pointer-events: none;
+    }
+    @keyframes floatWisp {
+      0%, 100% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0.3; }
+      50% { transform: translateY(-40px) translateX(25px) scale(1.3); opacity: 0.9; }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-braveGold selection:text-braveDarkGreen relative">
+
+  <!-- FUEGOS FATUOS DE FONDO -->
+  <div class="wisp top-1/4 left-10" style="animation-delay: 0s;"></div>
+  <div class="wisp top-1/2 right-12" style="animation-delay: 2s;"></div>
+  <div class="wisp top-3/4 left-1/3" style="animation-delay: 4s;"></div>
+
+  <!-- BOTÓN REPRODUCTOR DE MÚSICA -->
+  <div class="fixed bottom-4 right-4 z-50">
+    <button id="musicToggle" onclick="toggleAudio()" class="bg-braveGold text-braveDarkGreen p-3 rounded-full shadow-lg font-bold flex items-center gap-2 hover:bg-braveGoldLight transition-all">
+      <span id="musicIcon">🎵</span> <span id="musicText" class="text-xs">Música</span>
+    </button>
+    <audio id="bgMusic" loop src="assets/musica.mp3"></audio>
+  </div>
+
+  <!-- HERO / PORTADA -->
+  <header class="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-braveGreen via-braveDarkGreen to-black relative overflow-hidden">
+    <div class="p-8 gold-border rounded-xl bg-braveDarkGreen/80 backdrop-blur-sm max-w-xl w-full z-10">
+      <p class="tracking-widest text-xs uppercase text-braveGold mb-2 font-semibold">Mis XV Años</p>
+      <h1 class="font-title text-4xl sm:text-6xl font-black gold-gradient-text my-3 uppercase tracking-wider">
+        Mía Guadalupe
+      </h1>
+      <p class="text-sm font-light italic mb-6 text-emerald-200">"El destino vive dentro de nosotros, solo debes ser lo suficientemente valiente para verlo."</p>
+      
+      <div class="w-24 h-1 bg-braveGold mx-auto my-4 rounded-full"></div>
+      
+      <p class="font-title text-xl text-white font-bold tracking-widest my-2">14 · NOVIEMBRE · 2026</p>
+      <p class="text-xs tracking-wider text-braveGoldLight uppercase mb-6">Tampico, Tamaulipas</p>
+
+      <!-- AGREGAR A GOOGLE CALENDAR -->
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+A%C3%B1os+de+M%C3%ADa+Guadalupe&dates=20261114T230000Z/20261115T050000Z&details=Acomp%C3%B1anos+a+celebrar+los+XV+A%C3%B1os+de+M%C3%ADa+Guadalupe.&location=Hacienda+Los+Girasoles" target="_blank" class="inline-flex items-center gap-2 bg-braveGold/20 border border-braveGold text-braveGoldLight hover:bg-braveGold hover:text-braveDarkGreen text-xs font-bold py-2 px-4 rounded-full transition-all">
+        📅 AGREGAR A GOOGLE CALENDAR
+      </a>
+    </div>
+  </header>
+
+  <!-- CUENTA REGRESIVA -->
+  <section class="py-12 bg-braveDarkGreen text-center px-4">
+    <h2 class="font-title text-2xl text-braveGold mb-6 tracking-wide">LA AVENTURA COMIENZA EN</h2>
+    
+    <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
+      <div class="bg-braveGreen p-3 rounded-lg gold-border">
+        <span id="days" class="block font-title text-2xl sm:text-4xl text-white font-bold">00</span>
+        <span class="text-[10px] sm:text-xs text-braveGold uppercase">Días</span>
+      </div>
+      <div class="bg-braveGreen p-3 rounded-lg gold-border">
+        <span id="hours" class="block font-title text-2xl sm:text-4xl text-white font-bold">00</span>
+        <span class="text-[10px] sm:text-xs text-braveGold uppercase">Horas</span>
+      </div>
+      <div class="bg-braveGreen p-3 rounded-lg gold-border">
+        <span id="minutes" class="block font-title text-2xl sm:text-4xl text-white font-bold">00</span>
+        <span class="text-[10px] sm:text-xs text-braveGold uppercase">Minutos</span>
+      </div>
+      <div class="bg-braveGreen p-3 rounded-lg gold-border">
+        <span id="seconds" class="block font-title text-2xl sm:text-4xl text-white font-bold">00</span>
+        <span class="text-[10px] sm:text-xs text-braveGold uppercase">Segundos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- UBICACIONES / MISIONES DEL DÍA -->
+  <section class="py-16 px-4 bg-gradient-to-b from-braveDarkGreen to-braveGreen">
+    <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+      
+      <!-- CEREMONIA -->
+      <div class="bg-braveDarkGreen p-6 rounded-xl gold-border text-center flex flex-col justify-between">
+        <div>
+          <div class="text-4xl mb-2">⛪</div>
+          <h3 class="font-title text-xl text-braveGold font-bold mb-2">CEREMONIA RELIGIOSA</h3>
+          <p class="text-xs text-emerald-200 mb-4 uppercase tracking-widest">Iglesia de Nuestra Señora de las Mercedes</p>
+          <p class="text-sm font-semibold text-white my-2">🕒 Hora: 17:00 HRS</p>
+        </div>
+        <a href="https://maps.app.goo.gl/ZifmdcQZ5DDEDa9v5" target="_blank" rel="noopener" class="mt-6 inline-block bg-braveGold text-braveDarkGreen font-bold py-2 px-4 rounded hover:bg-braveGoldLight transition-colors text-sm">
+          📍 VER UBICACIÓN EN GOOGLE MAPS
+        </a>
+      </div>
+
+      <!-- RECEPCIÓN -->
+      <div class="bg-braveDarkGreen p-6 rounded-xl gold-border text-center flex flex-col justify-between">
+        <div>
+          <div class="text-4xl mb-2">🏰</div>
+          <h3 class="font-title text-xl text-braveGold font-bold mb-2">RECEPCIÓN</h3>
+          <p class="text-xs text-emerald-200 mb-4 uppercase tracking-widest">Hacienda Los Girasoles</p>
+          <p class="text-sm font-semibold text-white my-2">🕒 Hora: 19:00 HRS</p>
+        </div>
+        <a href="https://maps.app.goo.gl/Nb5Mw8CLYuLbhfTdA" target="_blank" rel="noopener" class="mt-6 inline-block bg-braveGold text-braveDarkGreen font-bold py-2 px-4 rounded hover:bg-braveGoldLight transition-colors text-sm">
+          📍 VER UBICACIÓN EN GOOGLE MAPS
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CÓDIGO DE VESTIMENTA Y REGALOS -->
+  <section class="py-16 px-4 bg-braveDarkGreen text-center">
+    <div class="max-w-2xl mx-auto space-y-12">
+      
+      <!-- DRESSCODE VISUAL CON COLORES -->
+      <div class="p-6 bg-braveGreen/50 rounded-xl gold-border">
+        <div class="text-3xl mb-2">👗👔</div>
+        <h3 class="font-title text-xl text-braveGold font-bold mb-2">CÓDIGO DE VESTIMENTA</h3>
+        <p class="text-lg font-semibold text-white mb-4">Formal / Gala</p>
+        
+        <p class="text-xs text-emerald-200 mb-3 uppercase tracking-wider">Sugerencia de Colores:</p>
+        <div class="flex justify-center items-center gap-4 mb-6">
+          <div class="w-8 h-8 rounded-full bg-blue-900 border border-white" title="Azul Marino"></div>
+          <div class="w-8 h-8 rounded-full bg-amber-600 border border-white" title="Dorado / Cobre"></div>
+          <div class="w-8 h-8 rounded-full bg-black border border-white" title="Negro"></div>
+          <div class="w-8 h-8 rounded-full bg-slate-700 border border-white" title="Gris Oscuro"></div>
+        </div>
+
+        <div class="inline-block p-3 rounded-lg bg-red-900/30 border border-red-500/50 text-xs text-red-200">
+          🚫 <strong class="text-white">Color Verde Esmeralda:</strong> Reservado exclusivamente para la festejada.
+        </div>
+      </div>
+
+      <!-- PASE DE ENTRADA -->
+      <div class="p-6 bg-braveGreen/50 rounded-xl gold-border">
+        <div class="text-3xl mb-2">🎟️</div>
+        <h3 class="font-title text-xl text-braveGold font-bold mb-2">PASES DE ENTRADA</h3>
+        <p class="text-sm text-emerald-100">
+          Hemos reservado <span class="font-bold text-white underline decoration-braveGold">pases familiares</span> en su honor.
+        </p>
+      </div>
+
+      <!-- LLUVIA DE SOBRES -->
+      <div class="p-6 bg-braveGreen/50 rounded-xl gold-border">
+        <div class="text-3xl mb-2">🎁✉️</div>
+        <h3 class="font-title text-xl text-braveGold font-bold mb-2">LLUVIA DE SOBRES</h3>
+        <p class="text-sm text-emerald-100 max-w-md mx-auto">
+          Su presencia es nuestro mejor regalo. Si desean hacerme un obsequio en efectivo, contaremos con un buzón el día del evento.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GALERÍA DE FOTOS -->
+  <section class="py-16 px-4 bg-gradient-to-b from-braveDarkGreen to-black text-center">
+    <h3 class="font-title text-2xl text-braveGold font-bold mb-2">GALERÍA DE FOTOS</h3>
+    <p class="text-xs text-emerald-200 mb-8 italic">Toca cualquier foto para ampliarla</p>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+      <img src="assets/foto1.jpg" alt="Mía Guadalupe" onclick="openLightbox(this.src)" class="rounded-lg gold-border object-cover h-64 w-full cursor-pointer hover:scale-105 transition-all">
+      <img src="assets/foto2.jpg" alt="Mía Guadalupe" onclick="openLightbox(this.src)" class="rounded-lg gold-border object-cover h-64 w-full cursor-pointer hover:scale-105 transition-all">
+      <img src="assets/foto3.jpg" alt="Mía Guadalupe" onclick="openLightbox(this.src)" class="rounded-lg gold-border object-cover h-64 w-full cursor-pointer hover:scale-105 transition-all">
+    </div>
+  </section>
+
+  <!-- VISOR DE FOTOS EN PANTALLA COMPLETA (LIGHTBOX) -->
+  <div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4">
+    <span class="absolute top-4 right-6 text-white text-3xl font-bold cursor-pointer">&times;</span>
+    <img id="lightboxImg" class="max-h-[90vh] max-w-[90vw] rounded-lg gold-border object-contain">
+  </div>
+
+  <!-- CONFIRMACIÓN DE ASISTENCIA (WHATSAPP) -->
+  <section class="py-16 px-4 bg-braveGreen text-center">
+    <div class="max-w-md mx-auto gold-border p-8 rounded-xl bg-braveDarkGreen">
+      <h3 class="font-title text-2xl text-braveGold font-bold mb-4">CONFIRMA TU ASISTENCIA</h3>
+      <p class="text-sm text-emerald-100 mb-6">Por favor confirma tu presencia antes del 1 de Noviembre de 2026.</p>
+      
+      <a href="https://wa.me/5212345678900?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Mía%20Guadalupe" target="_blank" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-6 rounded-full transition-all text-sm shadow-lg">
+        💬 CONFIRMAR POR WHATSAPP
+      </a>
+    </div>
+  </section>
+
+  <footer class="py-6 bg-black text-center text-xs text-braveGoldLight/60">
+    <p>© 2026 XV Años Mía Guadalupe · Celebración Valiente</p>
+  </footer>
+
+  <!-- JAVASCRIPT: CONTADOR, MÚSICA Y LIGHTBOX -->
+  <script>
+    const eventDate = new Date("Nov 14, 2026 17:00:00").getTime();
+
+    const countdown = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance < 0) {
+        clearInterval(countdown);
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+      document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+      document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+      document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+    }, 1000);
+
+    function toggleAudio() {
+      const audio = document.getElementById('bgMusic');
+      const icon = document.getElementById('musicIcon');
+      const text = document.getElementById('musicText');
+
+      if (audio.paused) {
+        audio.play();
+        icon.innerText = "🔊";
+        text.innerText = "Pausar";
+      } else {
+        audio.pause();
+        icon.innerText = "🎵";
+        text.innerText = "Música";
+      }
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
