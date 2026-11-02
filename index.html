@@ -70,7 +70,7 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* PANTALLA DE CARGA / INTRODUCCIÓN CON ZOOM */
+    /* PANTALLA DE CARGA / INTRODUCCIÓN CON SOBRE */
     #intro-screen {
       position: fixed;
       top: 0;
@@ -91,8 +91,12 @@
       visibility: hidden;
     }
 
+    /* CONTENEDOR DEL SOBRE 3D / ZOOM */
     .intro-content {
       animation: zoomEntradaFondo 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     @keyframes zoomEntradaFondo {
@@ -105,6 +109,76 @@
         transform: scale(1);
         opacity: 1;
         filter: blur(0);
+      }
+    }
+
+    /* DISEÑO DEL SOBRE ESTILO CARTA */
+    .envelope-box {
+      position: relative;
+      width: 320px;
+      height: 210px;
+      background: linear-gradient(145deg, #0b3c2d, #062b20);
+      border: 3px solid #d4af37;
+      border-radius: 8px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+    @media (min-width: 640px) {
+      .envelope-box {
+        width: 380px;
+        height: 240px;
+      }
+    }
+
+    .envelope-box:hover {
+      transform: scale(1.03);
+    }
+
+    /* SOLAPA DEL SOBRE (TRIÁNGULO INVERTIDO) */
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 190px solid transparent;
+      border-right: 190px solid transparent;
+      border-top: 110px solid #0b3c2d;
+      transform-origin: top;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+    }
+    @media (max-width: 640px) {
+      .envelope-flap {
+        border-left: 160px solid transparent;
+        border-right: 160px solid transparent;
+        border-top: 95px solid #0b3c2d;
+      }
+    }
+
+    /* BORDE DORADO PARA LA SOLAPA USANDO PSEUDOELEMENTO */
+    .envelope-flap::after {
+      content: '';
+      position: absolute;
+      top: -113px;
+      left: -190px;
+      width: 0;
+      height: 0;
+      border-left: 190px solid transparent;
+      border-right: 190px solid transparent;
+      border-top: 111px solid #d4af37;
+      z-index: -1;
+    }
+    @media (max-width: 640px) {
+      .envelope-flap::after {
+        left: -160px;
+        border-left: 160px solid transparent;
+        border-right: 160px solid transparent;
+        border-top: 96px solid #d4af37;
       }
     }
 
@@ -203,18 +277,31 @@
 </head>
 <body class="antialiased selection:bg-braveGold selection:text-braveDarkGreen relative">
 
-  <!-- PANTALLA DE INTRODUCCIÓN CON ZOOM E INTERACCIÓN PARA ACTIVAR MÚSICA -->
+  <!-- PANTALLA DE INTRODUCCIÓN CON SOBRE INTERACTIVO -->
   <div id="intro-screen" onclick="enterSite()">
-    <div class="intro-content text-center p-6">
-      <p class="font-title text-3xl sm:text-5xl font-bold gold-gradient-text tracking-widest">
-        XV AÑOS
-      </p>
-      <h2 class="font-title text-xl sm:text-3xl text-white font-semibold mt-4 tracking-wider">
-        Mía Guadalupe
-      </h2>
-      <p class="text-xs sm:text-sm text-braveGoldLight mt-8 tracking-widest uppercase animate-pulse">
-        ✨ Toca en cualquier lugar para abrir la invitación ✨
-      </p>
+    <div class="intro-content p-4">
+      
+      <!-- CORONA DECORATIVA SUPERIOR -->
+      <div class="text-3xl mb-2 text-braveGold drop-shadow-lg">👑</div>
+
+      <!-- SOBRE TIPO CARTA CON SOLAPA -->
+      <div class="envelope-box">
+        <div class="envelope-flap"></div>
+        
+        <div class="z-10 mt-6">
+          <p class="font-title text-sm sm:text-base text-braveGoldLight font-bold tracking-widest uppercase mb-1">
+            Mis XV Años
+          </p>
+          <h2 class="font-title text-xl sm:text-2xl text-white font-bold gold-gradient-text tracking-wide mb-3">
+            Mía Guadalupe
+          </h2>
+          <div class="w-12 h-0.5 bg-braveGold mx-auto my-2"></div>
+          <p class="text-[11px] sm:text-xs text-braveGold uppercase tracking-[0.2em] animate-pulse font-semibold">
+            ✨ Toca el sobre para abrir ✨
+          </p>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -434,7 +521,7 @@
 
   <!-- JAVASCRIPT -->
   <script>
-    // FUNCIÓN PARA ENTRAR AL SITIO Y ACTIVAR LA MÚSICA AL HACER CLIC
+    // FUNCIÓN PARA ABRIR EL SOBRE, ENTRAR AL SITIO Y ACTIVAR LA MÚSICA
     function enterSite() {
       const intro = document.getElementById('intro-screen');
       const audio = document.getElementById('bgMusic');
@@ -445,7 +532,7 @@
         intro.classList.add('fade-out');
       }
 
-      // Reproducir música al interactuar
+      // Reproducir música al interactuar con el sobre
       if (audio) {
         audio.play().then(() => {
           icon.innerText = "🔊";
