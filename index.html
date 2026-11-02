@@ -7,20 +7,19 @@
   
   <link href="assets/favicon.svg" rel="icon" type="image/svg+xml">
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Cinzel y diseño original -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    /* Aplicación de Cincel en títulos */
-    h1, h2, h3, header h1, header p:first-child {
+    /* Estilos específicos para el efecto de entrada imponente y tipografía Cinzel */
+    header h1, header p:first-of-type, h2, h3 {
       font-family: 'Cinzel', serif !important;
     }
 
-    /* Animación imponente: del fondo al frente */
     header h1 {
       font-size: clamp(3.2rem, 8vw, 6rem) !important;
       font-weight: 700;
@@ -28,7 +27,7 @@
       animation: zoomEntradaFondo 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    header p:first-child {
+    header p:first-of-type {
       font-size: clamp(1.4rem, 3.5vw, 2.2rem) !important;
       letter-spacing: 5px;
       animation: zoomEntradaFondo 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -50,9 +49,9 @@
 </head>
 <body>
 
-  <!-- Reproductor de audio -->
+  <!-- Elemento de audio -->
   <div>
-    <audio loop src="assets/musica.mp3" id="bg-music"></audio>
+    <audio loop src="assets/musica.mp3"></audio>
   </div>
 
   <!-- Cabecera Principal -->
@@ -61,13 +60,13 @@
       <p>Mis XV Años</p>
       <h1>Mía Guadalupe</h1>
       
-      <p style="font-family: 'Montserrat', sans-serif;">
+      <p>
         "El destino vive dentro de nosotros, solo debes ser lo suficientemente valiente para verlo."
       </p>
       
-      <div style="border-top: 1px solid rgba(212,175,55,0.4); border-bottom: 1px solid rgba(212,175,55,0.4); padding: 0.5rem 0; margin: 1rem auto; max-width: 300px;"></div>
+      <div></div>
       
-      <p style="font-family: 'Cinzel', serif; letter-spacing: 2px;">
+      <p>
         14 · NOVIEMBRE · 2026
       </p>
       <p>Tampico, Tamaulipas</p>
@@ -87,19 +86,19 @@
       
       <div>
         <div>
-          <span id="days">00</span>
+          <span>00</span>
           <span>Días</span>
         </div>
         <div>
-          <span id="hours">00</span>
+          <span>00</span>
           <span>Horas</span>
         </div>
         <div>
-          <span id="minutes">00</span>
+          <span>00</span>
           <span>Minutos</span>
         </div>
         <div>
-          <span id="seconds">00</span>
+          <span>00</span>
           <span>Segundos</span>
         </div>
       </div>
@@ -159,7 +158,9 @@
       <div>
         <div>🎟️</div>
         <h3>PASE DE ENTRADA</h3>
-        <p>Hemos reservado un lugar especial en su honor.</p>
+        <p>
+          Hemos reservado un lugar especial en su honor.
+        </p>
       </div>
 
       <div>
@@ -172,7 +173,7 @@
     </div>
   </section>
 
-  <!-- Sesión de Fotos (Antes Álbum de Recuerdos) -->
+  <!-- Sesión de Fotos (Actualizado) -->
   <section>
     <div>
       <h2>SESIÓN DE FOTOS</h2>
@@ -216,7 +217,9 @@
         <span>#XVMIA2026</span>
       </div>
 
-      <p>¡Etiquétanos en tus historias para revivir juntos esta mágica noche!</p>
+      <p>
+        ¡Etiquétanos en tus historias para revivir juntos esta mágica noche!
+      </p>
     </div>
   </section>
 
