@@ -85,18 +85,21 @@
       z-index: 9999;
       cursor: pointer;
       transition: opacity 1.5s ease-in-out, visibility 1.5s;
+      padding: 1rem;
     }
     #intro-screen.fade-out {
       opacity: 0;
       visibility: hidden;
     }
 
-    /* CONTENEDOR DEL SOBRE 3D / ZOOM */
+    /* CONTENEDOR DEL SOBRE CON ZOOM INICIAL */
     .intro-content {
       animation: zoomEntradaFondo 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
+      max-width: 440px;
     }
 
     @keyframes zoomEntradaFondo {
@@ -112,74 +115,40 @@
       }
     }
 
-    /* DISEÑO DEL SOBRE ESTILO CARTA */
+    /* DISEÑO DEL SOBRE MÁS GRANDE Y ADAPTABLE */
     .envelope-box {
       position: relative;
-      width: 320px;
-      height: 210px;
+      width: 100%;
+      height: 290px;
       background: linear-gradient(145deg, #0b3c2d, #062b20);
       border: 3px solid #d4af37;
-      border-radius: 8px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px rgba(212, 175, 55, 0.3);
+      border-radius: 12px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 30px rgba(212, 175, 55, 0.3);
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
       text-align: center;
-      padding: 20px;
-      transition: transform 0.3s ease;
+      padding: 30px 20px;
+      overflow: hidden;
     }
     @media (min-width: 640px) {
       .envelope-box {
-        width: 380px;
-        height: 240px;
+        height: 330px;
       }
     }
 
-    .envelope-box:hover {
-      transform: scale(1.03);
-    }
-
-    /* SOLAPA DEL SOBRE (TRIÁNGULO INVERTIDO) */
+    /* SOLAPA SUPERIOR (TRIÁNGULO EXACTO AL ANCHO DEL SOBRE) */
     .envelope-flap {
       position: absolute;
       top: 0;
       left: 0;
-      width: 0;
-      height: 0;
-      border-left: 190px solid transparent;
-      border-right: 190px solid transparent;
-      border-top: 110px solid #0b3c2d;
-      transform-origin: top;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
-    }
-    @media (max-width: 640px) {
-      .envelope-flap {
-        border-left: 160px solid transparent;
-        border-right: 160px solid transparent;
-        border-top: 95px solid #0b3c2d;
-      }
-    }
-
-    /* BORDE DORADO PARA LA SOLAPA USANDO PSEUDOELEMENTO */
-    .envelope-flap::after {
-      content: '';
-      position: absolute;
-      top: -113px;
-      left: -190px;
-      width: 0;
-      height: 0;
-      border-left: 190px solid transparent;
-      border-right: 190px solid transparent;
-      border-top: 111px solid #d4af37;
-      z-index: -1;
-    }
-    @media (max-width: 640px) {
-      .envelope-flap::after {
-        left: -160px;
-        border-left: 160px solid transparent;
-        border-right: 160px solid transparent;
-        border-top: 96px solid #d4af37;
-      }
+      width: 100%;
+      height: 145px;
+      background: linear-gradient(135deg, #d4af37, #aa7c11);
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 2;
     }
 
     /* CANVAS DE PARTICULAS */
@@ -277,26 +246,26 @@
 </head>
 <body class="antialiased selection:bg-braveGold selection:text-braveDarkGreen relative">
 
-  <!-- PANTALLA DE INTRODUCCIÓN CON SOBRE INTERACTIVO -->
+  <!-- PANTALLA DE INTRODUCCIÓN CON SOBRE ADAPTABLE Y CORONA -->
   <div id="intro-screen" onclick="enterSite()">
-    <div class="intro-content p-4">
+    <div class="intro-content">
       
       <!-- CORONA DECORATIVA SUPERIOR -->
-      <div class="text-3xl mb-2 text-braveGold drop-shadow-lg">👑</div>
+      <div class="text-4xl mb-[-12px] text-braveGold drop-shadow-lg z-10">👑</div>
 
-      <!-- SOBRE TIPO CARTA CON SOLAPA -->
+      <!-- SOBRE TIPO CARTA MÁS GRANDE Y CENTRADO -->
       <div class="envelope-box">
         <div class="envelope-flap"></div>
         
-        <div class="z-10 mt-6">
-          <p class="font-title text-sm sm:text-base text-braveGoldLight font-bold tracking-widest uppercase mb-1">
+        <div class="z-10 mt-6 flex flex-col items-center">
+          <p class="font-title text-sm sm:text-base text-braveDarkGreen font-bold tracking-widest uppercase mb-1 drop-shadow-sm">
             Mis XV Años
           </p>
-          <h2 class="font-title text-xl sm:text-2xl text-white font-bold gold-gradient-text tracking-wide mb-3">
+          <h2 class="font-title text-2xl sm:text-3xl text-braveDarkGreen font-black tracking-wide mb-3">
             Mía Guadalupe
           </h2>
-          <div class="w-12 h-0.5 bg-braveGold mx-auto my-2"></div>
-          <p class="text-[11px] sm:text-xs text-braveGold uppercase tracking-[0.2em] animate-pulse font-semibold">
+          <div class="w-16 h-0.5 bg-braveDarkGreen mx-auto my-1"></div>
+          <p class="text-xs sm:text-sm text-braveDarkGreen uppercase tracking-[0.2em] animate-pulse font-bold mt-4">
             ✨ Toca el sobre para abrir ✨
           </p>
         </div>
