@@ -55,7 +55,7 @@
       scroll-behavior: smooth;
     }
     body {
-      background-color: #052219; /* Fondo único continuo para toda la página */
+      background-color: #052219;
       color: #f3e5ab;
       font-family: 'Montserrat', sans-serif;
       overflow-x: hidden;
@@ -70,7 +70,7 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* PANTALLA DE CARGA / INTRODUCCIÓN LENTA CON EFECTO DE FONDO A FRENTE */
+    /* PANTALLA DE CARGA / INTRODUCCIÓN CON ZOOM */
     #intro-screen {
       position: fixed;
       top: 0;
@@ -83,6 +83,7 @@
       align-items: center;
       justify-content: center;
       z-index: 9999;
+      cursor: pointer;
       transition: opacity 1.5s ease-in-out, visibility 1.5s;
     }
     #intro-screen.fade-out {
@@ -90,7 +91,6 @@
       visibility: hidden;
     }
 
-    /* Animación de entrada imponente: del fondo hacia el frente con zoom y nitidez */
     .intro-content {
       animation: zoomEntradaFondo 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
@@ -108,7 +108,7 @@
       }
     }
 
-    /* CANVAS DE PARTICULAS FIJO EN EL FONDO */
+    /* CANVAS DE PARTICULAS */
     #wisp-canvas {
       position: fixed;
       top: 0;
@@ -119,7 +119,6 @@
       z-index: 1;
     }
 
-    /* ANIMACIÓN DE ENTRADA LENTA PARA EL HERO */
     .hero-entrance {
       opacity: 0;
       transform: translateY(40px) scale(0.94);
@@ -137,7 +136,6 @@
       }
     }
 
-    /* REVELADO AL HACER SCROLL */
     .reveal {
       opacity: 0;
       transform: translateY(40px) scale(0.96);
@@ -148,7 +146,6 @@
       transform: translateY(0) scale(1);
     }
 
-    /* ÁLBUM DE TARJETAS APILADAS 3D */
     .cards-stack-container {
       position: relative;
       width: 270px;
@@ -206,8 +203,8 @@
 </head>
 <body class="antialiased selection:bg-braveGold selection:text-braveDarkGreen relative">
 
-  <!-- PANTALLA DE INTRODUCCIÓN LENTA CON EFECTO DE ZOOM DESDE EL FONDO -->
-  <div id="intro-screen">
+  <!-- PANTALLA DE INTRODUCCIÓN CON ZOOM E INTERACCIÓN PARA ACTIVAR MÚSICA -->
+  <div id="intro-screen" onclick="enterSite()">
     <div class="intro-content text-center p-6">
       <p class="font-title text-3xl sm:text-5xl font-bold gold-gradient-text tracking-widest">
         XV AÑOS
@@ -215,10 +212,13 @@
       <h2 class="font-title text-xl sm:text-3xl text-white font-semibold mt-4 tracking-wider">
         Mía Guadalupe
       </h2>
+      <p class="text-xs sm:text-sm text-braveGoldLight mt-8 tracking-widest uppercase animate-pulse">
+        ✨ Toca en cualquier lugar para abrir la invitación ✨
+      </p>
     </div>
   </div>
 
-  <!-- CANVAS DE FUEGOS FATUOS DE FONDO COMPLETO -->
+  <!-- CANVAS DE FUEGOS FATUOS -->
   <canvas id="wisp-canvas"></canvas>
 
   <!-- BOTÓN REPRODUCTOR DE MÚSICA -->
@@ -434,15 +434,27 @@
 
   <!-- JAVASCRIPT -->
   <script>
-    // OCULTAR PANTALLA DE CARGA TRAS 2 SEGUNDOS
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const intro = document.getElementById('intro-screen');
-        if(intro) {
-          intro.classList.add('fade-out');
-        }
-      }, 2000);
-    });
+    // FUNCIÓN PARA ENTRAR AL SITIO Y ACTIVAR LA MÚSICA AL HACER CLIC
+    function enterSite() {
+      const intro = document.getElementById('intro-screen');
+      const audio = document.getElementById('bgMusic');
+      const icon = document.getElementById('musicIcon');
+      const text = document.getElementById('musicText');
+
+      if (intro) {
+        intro.classList.add('fade-out');
+      }
+
+      // Reproducir música al interactuar
+      if (audio) {
+        audio.play().then(() => {
+          icon.innerText = "🔊";
+          text.innerText = "Pausar";
+        }).catch(error => {
+          console.log("Audio play blocked or failed:", error);
+        });
+      }
+    }
 
     // SISTEMA DE PARTICULAS (FUEGOS FATUOS GRANDES CANVAS)
     const canvas = document.getElementById('wisp-canvas');
@@ -464,11 +476,11 @@
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.radius = Math.random() * 14 + 6; // Partículas grandes y luminosas
+        this.radius = Math.random() * 14 + 6;
         this.vx = (Math.random() - 0.5) * 0.6;
         this.vy = (Math.random() - 0.5) * 0.6;
         this.alpha = Math.random() * 0.7 + 0.3;
-        this.color = Math.random() > 0.4 ? '59, 130, 246' : '212, 175, 55'; // Azul Místico / Dorado
+        this.color = Math.random() > 0.4 ? '59, 130, 246' : '212, 175, 55';
       }
 
       update() {
