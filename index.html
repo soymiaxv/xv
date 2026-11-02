@@ -70,7 +70,7 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* PANTALLA DE CARGA / INTRODUCCIÓN LENTA */
+    /* PANTALLA DE CARGA / INTRODUCCIÓN LENTA CON EFECTO DE FONDO A FRENTE */
     #intro-screen {
       position: fixed;
       top: 0;
@@ -88,6 +88,24 @@
     #intro-screen.fade-out {
       opacity: 0;
       visibility: hidden;
+    }
+
+    /* Animación de entrada imponente: del fondo hacia el frente con zoom y nitidez */
+    .intro-content {
+      animation: zoomEntradaFondo 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes zoomEntradaFondo {
+      0% {
+        transform: scale(0.2);
+        opacity: 0;
+        filter: blur(12px);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+        filter: blur(0);
+      }
     }
 
     /* CANVAS DE PARTICULAS FIJO EN EL FONDO */
@@ -188,10 +206,10 @@
 </head>
 <body class="antialiased selection:bg-braveGold selection:text-braveDarkGreen relative">
 
-  <!-- PANTALLA DE INTRODUCCIÓN LENTA -->
+  <!-- PANTALLA DE INTRODUCCIÓN LENTA CON EFECTO DE ZOOM DESDE EL FONDO -->
   <div id="intro-screen">
-    <div class="text-center p-6">
-      <p class="font-title text-3xl sm:text-5xl font-bold gold-gradient-text tracking-widest animate-pulse">
+    <div class="intro-content text-center p-6">
+      <p class="font-title text-3xl sm:text-5xl font-bold gold-gradient-text tracking-widest">
         XV AÑOS
       </p>
       <h2 class="font-title text-xl sm:text-3xl text-white font-semibold mt-4 tracking-wider">
@@ -349,7 +367,7 @@
   <!-- GALERÍA / TARJETAS 3D -->
   <section class="py-20 px-4 text-center relative z-10 overflow-hidden">
     <div class="max-w-4xl mx-auto reveal flex flex-col items-center">
-      <h3 class="font-title text-2xl text-braveGold font-bold mb-2">ÁLBUM DE RECUERDOS</h3>
+      <h3 class="font-title text-2xl text-braveGold font-bold mb-2">SESIÓN DE FOTOS</h3>
       <p class="text-xs text-emerald-200 mb-6 italic">👉 Toca cualquier foto para ver la siguiente</p>
       
       <div class="cards-stack-container" id="cardsContainer" onclick="rotateCards()">
@@ -423,7 +441,7 @@
         if(intro) {
           intro.classList.add('fade-out');
         }
-      }, 1800);
+      }, 2000);
     });
 
     // SISTEMA DE PARTICULAS (FUEGOS FATUOS GRANDES CANVAS)
@@ -602,7 +620,7 @@ VERSION:2.0
 PRODID:-//XV Años Mía Guadalupe//NONSGML v1.0//ES
 BEGIN:VEVENT
 SUMMARY:XV Años de Mía Guadalupe 👑
-DESCRIPTION:Acompáñanos a celebrar los XV Años de Mía Guadalupe.\\nMisa: 17:00 HRS en Iglesia de Nuestra Señora de las Mercedes.\\nRecepción: 19:00 HRS en Hacienda Los Girasoles.
+DESCRIPTION:Acompáñanos a celebrar los XV Años de Mía Guadalupe.\nMisa: 17:00 HRS en Iglesia de Nuestra Señora de las Mercedes.\nRecepción: 19:00 HRS en Hacienda Los Girasoles.
 LOCATION:Hacienda Los Girasoles, Tampico, Tamaulipas
 DTSTART:20261114T230000Z
 DTEND:20261115T050000Z
