@@ -7,29 +7,59 @@
   
   <link href="assets/favicon.svg" rel="icon" type="image/svg+xml">
 
-  <!-- Google Fonts: Cinzel y diseño original -->
+  <!-- Google Fonts: Cinzel y Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* Estilos específicos para el efecto de entrada imponente y tipografía Cinzel */
-    header h1, header p:first-of-type, h2, h3 {
-      font-family: 'Cinzel', serif !important;
+    /* Estilos base elegantes para la invitación de XV Años */
+    * {
+      box-sizing: border-box;
     }
 
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #0b0f19;
+      color: #f3f4f6;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .cinzel-font {
+      font-family: 'Cinzel', serif;
+    }
+
+    /* Fondo de cabecera con la imagen y efecto oscuro */
+    header {
+      position: relative;
+      padding: 6rem 1rem;
+      background: linear-gradient(rgba(11, 15, 25, 0.75), rgba(11, 15, 25, 0.9)), url('assets/mia_1.webp') no-repeat center center/cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Animación de entrada imponente: del fondo hacia el frente */
     header h1 {
-      font-size: clamp(3.2rem, 8vw, 6rem) !important;
+      font-size: clamp(3.2rem, 8vw, 6rem);
       font-weight: 700;
       letter-spacing: 3px;
+      margin: 0.5rem 0;
+      color: #ffffff;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.8);
       animation: zoomEntradaFondo 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     header p:first-of-type {
-      font-size: clamp(1.4rem, 3.5vw, 2.2rem) !important;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
       letter-spacing: 5px;
+      color: #e5c158;
+      margin: 0;
       animation: zoomEntradaFondo 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
@@ -45,13 +75,78 @@
         filter: blur(0);
       }
     }
+
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.9rem 2.2rem;
+      background-color: #d4af37;
+      color: #0b0f19;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background 0.3s ease, transform 0.2s ease;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+
+    .btn:hover {
+      background-color: #e5c158;
+      transform: scale(1.05);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid rgba(212, 175, 55, 0.4);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    }
+
+    footer {
+      padding: 2.5rem;
+      background-color: #070910;
+      font-size: 0.9rem;
+      color: #9ca3af;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
   </style>
 </head>
 <body>
 
-  <!-- Elemento de audio -->
+  <!-- Reproductor de audio -->
   <div>
-    <audio loop src="assets/musica.mp3"></audio>
+    <audio autoplay loop src="assets/musica.mp3"></audio>
   </div>
 
   <!-- Cabecera Principal -->
@@ -60,19 +155,19 @@
       <p>Mis XV Años</p>
       <h1>Mía Guadalupe</h1>
       
-      <p>
+      <p style="font-family: 'Montserrat', sans-serif; font-weight: 300; max-width: 600px; margin: 1.5rem auto; line-height: 1.6; font-size: 1.1rem;">
         "El destino vive dentro de nosotros, solo debes ser lo suficientemente valiente para verlo."
       </p>
       
-      <div></div>
+      <div style="width: 80px; height: 2px; background: #d4af37; margin: 1.5rem auto;"></div>
       
-      <p>
+      <p style="font-family: 'Cinzel', serif; letter-spacing: 3px; font-size: 1.2rem; color: #f3f4f6;">
         14 · NOVIEMBRE · 2026
       </p>
-      <p>Tampico, Tamaulipas</p>
+      <p style="letter-spacing: 1px; color: #9ca3af; margin-top: 0.3rem;">Tampico, Tamaulipas</p>
 
-      <div>
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=XV+A%C3%B1os+de+M%C3%ADa+Guadalupe&amp;dates=20261114T230000Z/20261115T050000Z&amp;details=Acomp%C3%B1anos+a+celebrar+los+XV+A%C3%B1os+de+M%C3%ADa+Guadalupe.&amp;location=Hacienda+Los+Girasoles" target="_blank">
+      <div style="margin-top: 2rem;">
+        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=XV+A%C3%B1os+de+M%C3%ADa+Guadalupe&amp;dates=20261114T230000Z/20261115T050000Z&amp;details=Acomp%C3%B1anos+a+celebrar+los+XV+A%C3%B1os+de+M%C3%ADa+Guadalupe.&amp;location=Hacienda+Los+Girasoles" target="_blank">
           🌐 GOOGLE CALENDAR
         </a>
       </div>
@@ -81,164 +176,142 @@
 
   <!-- Cuenta Regresiva -->
   <section>
-    <div>
-      <h2>LA AVENTURA COMIENZA EN</h2>
-      
-      <div>
-        <div>
-          <span>00</span>
-          <span>Días</span>
-        </div>
-        <div>
-          <span>00</span>
-          <span>Horas</span>
-        </div>
-        <div>
-          <span>00</span>
-          <span>Minutos</span>
-        </div>
-        <div>
-          <span>00</span>
-          <span>Segundos</span>
-        </div>
+    <h2 style="font-size: 1.8rem; letter-spacing: 2px;">LA AVENTURA COMIENZA EN</h2>
+    <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap;">
+      <div class="card" style="padding: 1.2rem 1.8rem; min-width: 100px;">
+        <span style="font-size: 2.2rem; font-weight: bold; color: #d4af37; font-family: 'Cinzel', serif;" id="days">00</span><br><span style="font-size: 0.85rem; color: #9ca3af;">Días</span>
+      </div>
+      <div class="card" style="padding: 1.2rem 1.8rem; min-width: 100px;">
+        <span style="font-size: 2.2rem; font-weight: bold; color: #d4af37; font-family: 'Cinzel', serif;" id="hours">00</span><br><span style="font-size: 0.85rem; color: #9ca3af;">Horas</span>
+      </div>
+      <div class="card" style="padding: 1.2rem 1.8rem; min-width: 100px;">
+        <span style="font-size: 2.2rem; font-weight: bold; color: #d4af37; font-family: 'Cinzel', serif;" id="minutes">00</span><br><span style="font-size: 0.85rem; color: #9ca3af;">Minutos</span>
+      </div>
+      <div class="card" style="padding: 1.2rem 1.8rem; min-width: 100px;">
+        <span style="font-size: 2.2rem; font-weight: bold; color: #d4af37; font-family: 'Cinzel', serif;" id="seconds">00</span><br><span style="font-size: 0.85rem; color: #9ca3af;">Segundos</span>
       </div>
     </div>
   </section>
 
-  <!-- Ubicaciones -->
+  <!-- Ceremonia y Recepción -->
   <section>
-    <div>
-      <div>
-        <div>
-          <div>⛪</div>
-          <h3>CEREMONIA RELIGIOSA</h3>
-          <p>Iglesia de Nuestra Señora de las Mercedes</p>
-          <p>🕒 Hora: 17:00 HRS</p>
-        </div>
-        <a href="https://maps.app.goo.gl/ZifmdcQZ5DDEDa9v5" rel="noopener" target="_blank">
-          📍 VER UBICACIÓN EN GOOGLE MAPS
+    <div class="card-container">
+      <div class="card">
+        <div style="font-size: 2.5rem; margin-bottom: 1rem;">⛪</div>
+        <h3>CEREMONIA RELIGIOSA</h3>
+        <p style="color: #d1d5db; margin: 1rem 0;">Iglesia de Nuestra Señora de las Mercedes</p>
+        <p style="color: #d4af37; font-weight: bold; font-family: 'Cinzel', serif;">🕒 17:00 HRS</p>
+        <a class="btn" href="https://maps.app.goo.gl/ZifmdcQZ5DDEDa9v5" rel="noopener" target="_blank">
+          📍 VER UBICACIÓN
         </a>
       </div>
 
-      <div>
-        <div>
-          <div>🏰</div>
-          <h3>RECEPCIÓN</h3>
-          <p>Hacienda Los Girasoles</p>
-          <p>🕒 Hora: 19:00 HRS</p>
-        </div>
-        <a href="https://maps.app.goo.gl/Nb5Mw8CLYuLbhfTdA" rel="noopener" target="_blank">
-          📍 VER UBICACIÓN EN GOOGLE MAPS
+      <div class="card">
+        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏰</div>
+        <h3>RECEPCIÓN</h3>
+        <p style="color: #d1d5db; margin: 1rem 0;">Hacienda Los Girasoles</p>
+        <p style="color: #d4af37; font-weight: bold; font-family: 'Cinzel', serif;">🕒 19:00 HRS</p>
+        <a class="btn" href="https://maps.app.goo.gl/Nb5Mw8CLYuLbhfTdA" rel="noopener" target="_blank">
+          📍 VER UBICACIÓN
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Detalles -->
+  <!-- Detalles del Evento -->
   <section>
-    <div>
-      <div>
-        <div>👗👔</div>
+    <div class="card-container">
+      <div class="card">
+        <div style="font-size: 2.2rem; margin-bottom: 1rem;">👗👔</div>
         <h3>CÓDIGO DE VESTIMENTA</h3>
-        <p>Formal / Gala</p>
-        
-        <p>Sugerencia de Colores:</p>
-        <div>
-          <div title="Azul Marino"></div>
-          <div title="Dorado / Cobre"></div>
-          <div title="Negro"></div>
-          <div title="Gris Oscuro"></div>
+        <p style="color: #d1d5db; margin-top: 0.5rem;">Formal / Gala</p>
+        <p style="font-size: 0.9rem; color: #9ca3af; margin-top: 1.2rem;">Sugerencia de Colores:</p>
+        <div style="display: flex; justify-content: center; gap: 0.8rem; margin: 0.8rem 0 1.2rem 0;">
+          <div style="width: 25px; height: 25px; background: #1b2a4a; border-radius: 50%;" title="Azul Marino"></div>
+          <div style="width: 25px; height: 25px; background: #c5a059; border-radius: 50%;" title="Dorado / Cobre"></div>
+          <div style="width: 25px; height: 25px; background: #111; border: 1px solid #444; border-radius: 50%;" title="Negro"></div>
+          <div style="width: 25px; height: 25px; background: #4b5563; border-radius: 50%;" title="Gris Oscuro"></div>
         </div>
-
-        <div>
-          🚫 <strong>Color Verde Esmeralda:</strong> Reservado exclusivamente para la festejada.
-        </div>
+        <p style="font-size: 0.85rem; color: #e5c158; line-height: 1.4;">🚫 Color Verde Esmeralda reservado exclusivamente para la festejada.</p>
       </div>
 
-      <div>
-        <div>🎟️</div>
-        <h3>PASE DE ENTRADA</h3>
-        <p>
-          Hemos reservado un lugar especial en su honor.
-        </p>
-      </div>
-
-      <div>
-        <div>🎁✉️</div>
+      <div class="card">
+        <div style="font-size: 2.2rem; margin-bottom: 1rem;">🎁✉️</div>
         <h3>LLUVIA DE SOBRES</h3>
-        <p>
+        <p style="font-size: 0.95rem; color: #d1d5db; line-height: 1.6; margin-top: 1rem;">
           Su presencia es nuestro mejor regalo. Si desean hacerme un obsequio en efectivo, contaremos con un buzón el día del evento.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Sesión de Fotos (Actualizado) -->
+  <!-- Sesión de Fotos -->
   <section>
-    <div>
-      <h2>SESIÓN DE FOTOS</h2>
-      <p>👉 Toca cualquier foto para ver la siguiente</p>
-      
-      <div>
-        <div>
-          <img alt="Mía Guadalupe 1" src="assets/mia_1.webp">
-          <div>
-            <span>Mía Guadalupe 👑</span>
-          </div>
-        </div>
-
-        <div>
-          <img alt="Mía Guadalupe 2" src="assets/mia_2.webp">
-          <div>
-            <span>Mis XV Años ✨</span>
-          </div>
-        </div>
-
-        <div>
-          <img alt="Mía Guadalupe 3" src="assets/mia_3.webp">
-          <div>
-            <span>Celebración Valiente 🏹</span>
-          </div>
-        </div>
+    <h2 style="font-size: 2.2rem; letter-spacing: 1px;">SESIÓN DE FOTOS</h2>
+    <p style="color: #9ca3af; margin-top: 0.5rem;">Descubre algunos momentos mágicos previos al gran día</p>
+    
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img alt="Mía Guadalupe 1" src="assets/mia_1.webp">
+      </div>
+      <div class="gallery-item">
+        <img alt="Mía Guadalupe 2" src="assets/mia_2.webp">
+      </div>
+      <div class="gallery-item">
+        <img alt="Mía Guadalupe 3" src="assets/mia_3.webp">
       </div>
     </div>
   </section>
 
-  <!-- Redes Sociales -->
-  <section>
-    <div>
-      <div>📸✨</div>
-      <h3>COMPARTE NUESTROS RECUERDOS</h3>
-      <p>
-        Ayúdanos a capturar cada momento de esta gran celebración compartiendo tus fotos y videos en Instagram o TikTok con el hashtag:
-      </p>
-      
-      <div>
-        <span>#XVMIA2026</span>
-      </div>
-
-      <p>
-        ¡Etiquétanos en tus historias para revivir juntos esta mágica noche!
-      </p>
+  <!-- Hashtag e Instagram -->
+  <section style="background: rgba(212, 175, 55, 0.03); border-top: 1px solid rgba(212, 175, 55, 0.1); border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+    <div style="font-size: 2.5rem; margin-bottom: 1rem;">📸✨</div>
+    <h3 style="font-size: 1.6rem;">COMPARTE NUESTROS RECUERDOS</h3>
+    <p style="max-width: 600px; margin: 1rem auto; line-height: 1.6; color: #d1d5db;">
+      Ayúdanos a capturar cada momento de esta gran celebración compartiendo tus fotos y videos con el hashtag:
+    </p>
+    <div style="font-size: 2rem; font-weight: bold; color: #d4af37; font-family: 'Cinzel', serif; margin: 1.5rem 0; letter-spacing: 2px;">
+      #XVMIA2026
     </div>
   </section>
 
-  <!-- Confirmación WhatsApp -->
+  <!-- Confirmación de Asistencia -->
   <section>
-    <div>
-      <h2>CONFIRMA TU ASISTENCIA</h2>
-      <p>Por favor confirma tu presencia antes del 1 de Noviembre de 2026.</p>
-      
-      <a href="https://wa.me/528331171109?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Mía%20Guadalupe" target="_blank">
-        💬 CONFIRMAR POR WHATSAPP
-      </a>
-    </div>
+    <h2 style="font-size: 2.2rem; letter-spacing: 1px;">CONFIRMA TU ASISTENCIA</h2>
+    <p style="color: #d1d5db; margin: 1rem 0;">Por favor confirma tu presencia antes del 1 de Noviembre de 2026.</p>
+    <a class="btn" style="font-size: 1.1rem; padding: 1rem 2.5rem; margin-top: 1.5rem;" href="https://wa.me/528331171109?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Mía%20Guadalupe" target="_blank">
+      💬 CONFIRMAR POR WHATSAPP
+    </a>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>© 2026 XV Años Mía Guadalupe · Celebración Valiente</p>
   </footer>
 
-  <script src="js/main.js"></script>
+  <!-- Script de la Cuenta Regresiva -->
+  <script>
+    const eventDate = new Date("November 14, 2026 17:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance < 0) return;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = String(days).padStart(2, '0');
+      document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+      document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
 </body>
 </html>
