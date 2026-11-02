@@ -70,7 +70,33 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* ANIMACIONES DE REVELADO EN SCROLL */
+    /* PARTICULAS FATUAS GRANDES DE FONDO */
+    #wisp-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ANIMACIONES DE ENTRADA Y REVELADO */
+    .hero-float {
+      animation: floatIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes floatIn {
+      0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.92);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
     .reveal {
       opacity: 0;
       transform: translateY(40px) scale(0.96);
@@ -79,31 +105,6 @@
     .reveal.active {
       opacity: 1;
       transform: translateY(0) scale(1);
-    }
-
-    /* PARTICULAS / FUEGOS FATUOS DE FONDO */
-    #particles-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
-    .wisp-particle {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(191,219,254,1) 0%, rgba(59,130,246,0.8) 50%, rgba(37,99,235,0) 100%);
-      box-shadow: 0 0 15px 4px rgba(59, 130, 246, 0.6);
-      animation: floatWispParticle var(--duration) infinite ease-in-out var(--delay);
-      opacity: var(--opacity);
-    }
-
-    @keyframes floatWispParticle {
-      0%, 100% { transform: translateY(0) translateX(0) scale(0.8); }
-      50% { transform: translateY(var(--move-y)) translateX(var(--move-x)) scale(1.4); }
     }
 
     /* ÁLBUM DE TARJETAS APILADAS 3D */
@@ -173,8 +174,8 @@
 </head>
 <body class="antialiased selection:bg-braveGold selection:text-braveDarkGreen relative">
 
-  <!-- CONTENEDOR DE PARTICULAS -->
-  <div id="particles-container"></div>
+  <!-- CANVAS DE FUEGOS FATUOS GRANDES PANTALLA COMPLETA -->
+  <canvas id="wisp-canvas"></canvas>
 
   <!-- BOTÓN REPRODUCTOR DE MÚSICA -->
   <div class="fixed bottom-4 right-4 z-50">
@@ -184,26 +185,32 @@
     <audio id="bgMusic" loop src="assets/musica.mp3"></audio>
   </div>
 
-  <!-- HERO / PORTADA -->
-  <header class="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-braveGreen via-braveDarkGreen to-black relative overflow-hidden">
-    <div class="p-8 sm:p-12 gold-border rounded-2xl bg-braveDarkGreen/85 backdrop-blur-md max-w-xl w-full z-10 reveal active">
-      <p class="tracking-widest text-xs uppercase text-braveGold mb-2 font-semibold">Mis XV Años</p>
-      <h1 class="font-title text-4xl sm:text-6xl font-black gold-gradient-text my-3 uppercase tracking-wider">
+  <!-- HERO / PORTADA FLOTANTE SIN RECUADRO -->
+  <header class="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-braveGreen via-braveDarkGreen to-black relative overflow-hidden z-10">
+    <div class="hero-float max-w-2xl w-full flex flex-col items-center justify-center">
+      <p class="tracking-[0.3em] text-xs sm:text-sm uppercase text-braveGold mb-4 font-semibold drop-shadow">Mis XV Años</p>
+      
+      <h1 class="font-title text-5xl sm:text-7xl font-black gold-gradient-text my-2 uppercase tracking-wider drop-shadow-2xl">
         Mía Guadalupe
       </h1>
-      <p class="text-sm font-light italic mb-6 text-emerald-200">"El destino vive dentro de nosotros, solo debes ser lo suficientemente valiente para verlo."</p>
       
-      <div class="w-24 h-1 bg-braveGold mx-auto my-4 rounded-full"></div>
+      <p class="text-sm sm:text-base font-light italic my-6 text-emerald-200 max-w-lg mx-auto leading-relaxed drop-shadow">
+        "El destino vive dentro de nosotros, solo debes ser lo suficientemente valiente para verlo."
+      </p>
       
-      <p class="font-title text-xl text-white font-bold tracking-widest my-2">14 · NOVIEMBRE · 2026</p>
-      <p class="text-xs tracking-wider text-braveGoldLight uppercase mb-6">Tampico, Tamaulipas</p>
+      <div class="w-28 h-0.5 bg-gradient-to-r from-transparent via-braveGold to-transparent my-4"></div>
+      
+      <p class="font-title text-2xl sm:text-3xl text-white font-bold tracking-widest my-3 drop-shadow">
+        14 · NOVIEMBRE · 2026
+      </p>
+      <p class="text-xs sm:text-sm tracking-[0.2em] text-braveGoldLight uppercase mb-10">Tampico, Tamaulipas</p>
 
       <!-- BOTONES DE CALENDARIO -->
-      <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
-        <button onclick="downloadICS()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-braveGold text-braveDarkGreen hover:bg-braveGoldLight text-xs font-bold py-2.5 px-5 rounded-full transition-all shadow-lg hover:scale-105">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md">
+        <button onclick="downloadICS()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-braveGold text-braveDarkGreen hover:bg-braveGoldLight text-xs font-bold py-3 px-6 rounded-full transition-all shadow-xl hover:scale-105">
           📅 GUARDAR EVENTO EN MI CELULAR
         </button>
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+A%C3%B1os+de+M%C3%ADa+Guadalupe&dates=20261114T230000Z/20261115T050000Z&details=Acomp%C3%B1anos+a+celebrar+los+XV+A%C3%B1os+de+M%C3%ADa+Guadalupe.&location=Hacienda+Los+Girasoles" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-braveGold/20 border border-braveGold text-braveGoldLight hover:bg-braveGold hover:text-braveDarkGreen text-xs font-bold py-2.5 px-5 rounded-full transition-all hover:scale-105">
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+A%C3%B1os+de+M%C3%ADa+Guadalupe&dates=20261114T230000Z/20261115T050000Z&details=Acomp%C3%B1anos+a+celebrar+los+XV+A%C3%B1os+de+M%C3%ADa+Guadalupe.&location=Hacienda+Los+Girasoles" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-braveGold/20 border border-braveGold text-braveGoldLight hover:bg-braveGold hover:text-braveDarkGreen text-xs font-bold py-3 px-6 rounded-full transition-all hover:scale-105">
           🌐 GOOGLE CALENDAR
         </a>
       </div>
@@ -383,6 +390,73 @@
 
   <!-- JAVASCRIPT -->
   <script>
+    // SISTEMA DE PARTICULAS (FUEGOS FATUOS GRANDES CANVAS)
+    const canvas = document.getElementById('wisp-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class WispParticle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 12 + 6; // Partículas más grandes (6px a 18px)
+        this.vx = (Math.random() - 0.5) * 0.8;
+        this.vy = (Math.random() - 0.5) * 0.8;
+        this.alpha = Math.random() * 0.6 + 0.2;
+        this.color = Math.random() > 0.4 ? '59, 130, 246' : '212, 175, 55'; // Azul Místico o Dorado
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+        gradient.addColorStop(0, `rgba(${this.color}, ${this.alpha})`);
+        gradient.addColorStop(0.5, `rgba(${this.color}, ${this.alpha * 0.4})`);
+        gradient.addColorStop(1, `rgba(${this.color}, 0)`);
+        ctx.fillStyle = gradient;
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initWisps() {
+      particles = [];
+      const count = Math.min(Math.floor(window.innerWidth / 15), 45);
+      for (let i = 0; i < count; i++) {
+        particles.push(new WispParticle());
+      }
+    }
+    initWisps();
+
+    function animateWisps() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateWisps);
+    }
+    animateWisps();
+
     // PASES DINÁMICOS POR NOMBRE
     function setupDynamicPasses() {
       const urlParams = new URLSearchParams(window.location.search);
@@ -423,39 +497,6 @@
         isAnimating = false;
       }, 500);
     }
-
-    // GENERADOR DE PARTICULAS
-    function createParticles() {
-      const container = document.getElementById('particles-container');
-      const particleCount = window.innerWidth < 640 ? 30 : 60;
-
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'wisp-particle';
-
-        const size = Math.random() * 8 + 4;
-        const left = Math.random() * 100;
-        const top = Math.random() * 100;
-        const duration = Math.random() * 8 + 4;
-        const delay = Math.random() * 5;
-        const opacity = Math.random() * 0.7 + 0.3;
-        const moveX = (Math.random() - 0.5) * 60;
-        const moveY = (Math.random() - 0.5) * 80;
-
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${left}%`;
-        particle.style.top = `${top}%`;
-        particle.style.setProperty('--duration', `${duration}s`);
-        particle.style.setProperty('--delay', `${delay}s`);
-        particle.style.setProperty('--opacity', opacity);
-        particle.style.setProperty('--move-x', `${moveX}px`);
-        particle.style.setProperty('--move-y', `${moveY}px`);
-
-        container.appendChild(particle);
-      }
-    }
-    createParticles();
 
     // REVELADO AL SCROLL
     const observerOptions = {
