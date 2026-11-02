@@ -60,6 +60,12 @@
       font-family: 'Montserrat', sans-serif;
       overflow-x: hidden;
     }
+    /* Bloquear scroll mientras el sobre esté activo */
+    body.locked {
+      overflow: hidden;
+      height: 100vh;
+    }
+
     .gold-border {
       border: 2px solid #d4af37;
       box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
@@ -70,13 +76,13 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* PANTALLA DE CARGA / INTRODUCCIÓN CON SOBRE */
+    /* PANTALLA DE CARGA / INTRODUCCIÓN PERFECTAMENTE CENTRADA */
     #intro-screen {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
-      height: 100vh;
+      height: 100dvh; /* Altura dinámica real para móviles como iPhone */
       background-color: #052219;
       display: flex;
       flex-direction: column;
@@ -99,7 +105,7 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      max-width: 440px;
+      max-width: 400px;
     }
 
     @keyframes zoomEntradaFondo {
@@ -115,11 +121,11 @@
       }
     }
 
-    /* DISEÑO DEL SOBRE MÁS GRANDE Y ADAPTABLE */
+    /* DISEÑO DEL SOBRE ADAPTABLE */
     .envelope-box {
       position: relative;
       width: 100%;
-      height: 290px;
+      height: 270px;
       background: linear-gradient(145deg, #0b3c2d, #062b20);
       border: 3px solid #d4af37;
       border-radius: 12px;
@@ -129,12 +135,12 @@
       align-items: center;
       justify-content: flex-end;
       text-align: center;
-      padding: 30px 20px;
+      padding: 25px 20px;
       overflow: hidden;
     }
     @media (min-width: 640px) {
       .envelope-box {
-        height: 330px;
+        height: 310px;
       }
     }
 
@@ -144,7 +150,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 145px;
+      height: 135px;
       background: linear-gradient(135deg, #d4af37, #aa7c11);
       clip-path: polygon(0 0, 50% 100%, 100% 0);
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
@@ -244,28 +250,28 @@
     }
   </style>
 </head>
-<body class="antialiased selection:bg-braveGold selection:text-braveDarkGreen relative">
+<body class="antialiased selection:bg-braveGold selection:text-braveDarkGreen relative locked">
 
-  <!-- PANTALLA DE INTRODUCCIÓN CON SOBRE ADAPTABLE Y CORONA -->
+  <!-- PANTALLA DE INTRODUCCIÓN CON SOBRE CENTRADO Y BLOQUEO DE SCROLL -->
   <div id="intro-screen" onclick="enterSite()">
     <div class="intro-content">
       
       <!-- CORONA DECORATIVA SUPERIOR -->
-      <div class="text-4xl mb-[-12px] text-braveGold drop-shadow-lg z-10">👑</div>
+      <div class="text-3xl mb-[-10px] text-braveGold drop-shadow-lg z-10">👑</div>
 
-      <!-- SOBRE TIPO CARTA MÁS GRANDE Y CENTRADO -->
+      <!-- SOBRE TIPO CARTA ADAPTABLE Y CENTRADO -->
       <div class="envelope-box">
         <div class="envelope-flap"></div>
         
-        <div class="z-10 mt-6 flex flex-col items-center">
-          <p class="font-title text-sm sm:text-base text-braveGoldLight font-bold tracking-widest uppercase mb-1 drop-shadow-sm">
+        <div class="z-10 mt-4 flex flex-col items-center">
+          <p class="font-title text-xs sm:text-sm text-braveGoldLight font-bold tracking-widest uppercase mb-1 drop-shadow-sm">
             Mis XV Años
           </p>
-          <h2 class="font-title text-2xl sm:text-3xl font-black gold-gradient-text tracking-wide mb-3 drop-shadow">
+          <h2 class="font-title text-xl sm:text-2xl font-black gold-gradient-text tracking-wide mb-2 drop-shadow">
             Mía Guadalupe
           </h2>
-          <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-braveGold to-transparent mx-auto my-1"></div>
-          <p class="text-xs sm:text-sm text-braveGoldLight uppercase tracking-[0.2em] animate-pulse font-bold mt-4 drop-shadow">
+          <div class="w-12 h-0.5 bg-gradient-to-r from-transparent via-braveGold to-transparent mx-auto my-1"></div>
+          <p class="text-[11px] sm:text-xs text-braveGoldLight uppercase tracking-[0.2em] animate-pulse font-bold mt-3 drop-shadow">
             ✨ Toca el sobre para abrir ✨
           </p>
         </div>
@@ -490,7 +496,7 @@
 
   <!-- JAVASCRIPT -->
   <script>
-    // FUNCIÓN PARA ABRIR EL SOBRE, ENTRAR AL SITIO Y ACTIVAR LA MÚSICA
+    // FUNCIÓN PARA ABRIR EL SOBRE, DESBLOQUEAR SCROLL Y ACTIVAR LA MÚSICA
     function enterSite() {
       const intro = document.getElementById('intro-screen');
       const audio = document.getElementById('bgMusic');
@@ -500,6 +506,9 @@
       if (intro) {
         intro.classList.add('fade-out');
       }
+
+      // Habilitar de nuevo el scroll de la página principal
+      document.body.classList.remove('locked');
 
       // Reproducir música al interactuar con el sobre
       if (audio) {
