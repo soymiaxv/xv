@@ -387,8 +387,8 @@
         <p class="text-sm text-emerald-100 mb-4">
           Hemos reservado un lugar especial para:
         </p>
-        <div id="passText" class="inline-block bg-black/50 border-2 border-braveGold px-8 py-4 rounded-2xl shadow-xl max-w-full">
-          <span class="font-title text-xl sm:text-2xl text-white font-bold tracking-wider">Nuestros Queridos Familiares y Amigos</span>
+        <div id="passContainer" class="inline-block bg-black/50 border-2 border-braveGold px-8 py-4 rounded-2xl shadow-xl max-w-full">
+          <div id="passText" class="font-title text-xl sm:text-2xl text-white font-bold tracking-wider leading-relaxed whitespace-pre-line">Nuestros Queridos Familiares y Amigos</div>
         </div>
       </div>
 
@@ -655,7 +655,7 @@
     }
     animateWisps();
 
-    // PASES DINÁMICOS POR NOMBRE
+    // PASES DINÁMICOS POR NOMBRE (SOPORTE DE SALTO DE LÍNEA / ENTER)
     function setupDynamicPasses() {
       const urlParams = new URLSearchParams(window.location.search);
       const invitado = urlParams.get('invitado');
@@ -663,9 +663,10 @@
       const whatsappBtn = document.getElementById('whatsappBtn');
 
       if (invitado) {
-        passTextEl.innerHTML = `<span class="font-title text-xl sm:text-2xl text-white font-bold tracking-wider">${invitado}</span>`;
+        passTextEl.textContent = invitado;
 
-        let mensajeWa = `¡Hola! Confirmo mi asistencia a los XV años de Mía Guadalupe. (Asistirá: ${invitado})`;
+        let textoLimpioWa = invitado.replace(/\n/g, ' ');
+        let mensajeWa = `¡Hola! Confirmo mi asistencia a los XV años de Mía Guadalupe. (Asistirá: ${textoLimpioWa})`;
         whatsappBtn.href = `https://wa.me/528331171109?text=${encodeURIComponent(mensajeWa)}`;
       }
     }
